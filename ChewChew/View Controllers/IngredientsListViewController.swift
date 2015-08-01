@@ -221,6 +221,7 @@ extension IngredientsListViewController: UITextFieldDelegate {
                 if endingText == item.name {
                     textField.text = beginningText
                     endingText = textField.text
+                    break
                 }
             }
             
