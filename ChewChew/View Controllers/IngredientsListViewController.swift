@@ -20,13 +20,27 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var clearButton : UIButton!
     
     @IBAction func buttonTapped(sender: AnyObject) {
-        tableView.dataSource = self
         
         let realm = Realm()
-        realm.write() {
-            realm.deleteAll()
+        self.tableView.dataSource = self
+        
+        if realm.objects(Ingredient).count > 0 {
+            let alertController = UIAlertController(title: "Clear All Ingredients?", message: "This can't be undone!", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+                
+                
+                realm.write() {
+                    realm.deleteAll()
+                }
+                self.tableView.reloadData()
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        tableView.reloadData()
+        
     }
     
     @IBAction func unwindToSegue(segue: UIStoryboardSegue) {

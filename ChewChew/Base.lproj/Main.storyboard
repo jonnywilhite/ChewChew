@@ -8,7 +8,7 @@
         <!--Home-->
         <scene sceneID="zjv-9d-ioV">
             <objects>
-                <tableViewController modalPresentationStyle="currentContext" id="v3Z-1u-EoJ" customClass="HomeTableViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="v3Z-1u-EoJ" customClass="HomeTableViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="oEt-0q-8ng">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Include Recipes For..." footerTitle=" " id="zbf-7a-Q3w">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" id="aIV-VB-KUS" customClass="MealTypeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" id="aIV-VB-KUS" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aIV-VB-KUS" id="vWN-9y-xQl">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -57,7 +57,7 @@
                                             <outlet property="mySwitch" destination="EYL-kK-q6C" id="IB5-QU-NqG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="RBi-LH-oRR" style="IBUITableViewCellStyleDefault" id="R8r-hX-okw" customClass="MealTypeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="RBi-LH-oRR" style="IBUITableViewCellStyleDefault" id="R8r-hX-okw" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R8r-hX-okw" id="xVO-bN-UOC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -74,7 +74,7 @@
                                             <outlet property="mySwitch" destination="EYL-kK-q6C" id="WqP-Cv-0YY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="Gyx-if-ozY" style="IBUITableViewCellStyleDefault" id="ilE-Ps-TDq" customClass="MealTypeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="Gyx-if-ozY" style="IBUITableViewCellStyleDefault" id="ilE-Ps-TDq" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ilE-Ps-TDq" id="029-CQ-Zf1">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -91,7 +91,7 @@
                                             <outlet property="mySwitch" destination="EYL-kK-q6C" id="7Tn-f8-Cu8"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="6Cd-7h-nOb" style="IBUITableViewCellStyleDefault" id="Phn-F6-ggM" customClass="MealTypeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealTypeCell" textLabel="6Cd-7h-nOb" style="IBUITableViewCellStyleDefault" id="Phn-F6-ggM" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Phn-F6-ggM" id="OCY-VC-vgY">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -112,7 +112,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="NIB-hm-CUv">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="VHi-me-erq" style="IBUITableViewCellStyleDefault" id="kT9-ok-cc3" customClass="MealTypeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="VHi-me-erq" style="IBUITableViewCellStyleDefault" id="kT9-ok-cc3" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kT9-ok-cc3" id="pc8-Rj-JXk">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -149,7 +149,7 @@
         <!--Ingredients List-->
         <scene sceneID="JOA-P1-3Sj">
             <objects>
-                <viewController id="7BU-U6-VyA" customClass="IngredientsListViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7BU-U6-VyA" customClass="IngredientsListViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UHT-2H-EPe"/>
                         <viewControllerLayoutGuide type="bottom" id="Z0b-YM-c51"/>
@@ -162,7 +162,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="472"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="Ebw-ci-4lf" detailTextLabel="PcO-Rg-S4w" style="IBUITableViewCellStyleValue1" id="i2U-yc-RC9" customClass="IngredientTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="Ebw-ci-4lf" detailTextLabel="PcO-Rg-S4w" style="IBUITableViewCellStyleValue1" id="i2U-yc-RC9" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i2U-yc-RC9" id="6uR-2D-jLL">
@@ -231,13 +231,13 @@
         <!--Recipes-->
         <scene sceneID="KBg-Sy-8U4">
             <objects>
-                <tableViewController id="Qn6-Ab-n01" customClass="RecipesListTableViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Qn6-Ab-n01" customClass="RecipesListTableViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="22" sectionFooterHeight="22" id="FYM-h6-gDZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="250" id="S5I-tj-ShR" customClass="RecipeTableViewCell" customModule="TemplateProject" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="250" id="S5I-tj-ShR" customClass="RecipeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5I-tj-ShR" id="ahB-Fd-Mpy">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -310,7 +310,7 @@
         <!--Add New Ingredient-->
         <scene sceneID="JzM-qO-SnG">
             <objects>
-                <viewController title="Add New Ingredient" id="dt0-XA-3el" customClass="NewIngredientViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add New Ingredient" id="dt0-XA-3el" customClass="NewIngredientViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VSg-AO-qt2"/>
                         <viewControllerLayoutGuide type="bottom" id="2f3-uS-jgG"/>
@@ -364,7 +364,7 @@
         <!--Edit Ingredient-->
         <scene sceneID="DvT-ic-BJq">
             <objects>
-                <viewController title="Edit Ingredient" id="xbu-ET-0J0" customClass="AddIngredientViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Edit Ingredient" id="xbu-ET-0J0" customClass="AddIngredientViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G9u-n3-t2M"/>
                         <viewControllerLayoutGuide type="bottom" id="Rvf-f1-PJN"/>
