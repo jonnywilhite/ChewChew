@@ -14,18 +14,16 @@ import SwiftHTTP
 class HomeTableViewController: UITableViewController {
     
     var alertControllerDisplayed : Bool?
-    
     var recipes: [Recipe] = []
-    
     var currentRecipe : Recipe?
-    
     var ingredients : Results<Ingredient>!
 
     @IBOutlet weak var detailLabel : UILabel!
     
+    //MARK: View openings
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,13 +39,12 @@ class HomeTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Table View Data
+    //MARK: Table Setup
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
         var cell = self.tableView.dequeueReusableCellWithIdentifier("MealTypeCell") as? UITableViewCell
-        
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "IngredientNumberCell")
         }
@@ -120,7 +117,6 @@ class HomeTableViewController: UITableViewController {
             while alertControllerDisplayed == nil {
                 continue
             }
-            
             if (self.alertControllerDisplayed! == false) {
                 self.performSegueWithIdentifier("SearchRecipes", sender: self)
             }
@@ -135,6 +131,8 @@ class HomeTableViewController: UITableViewController {
             destVC.recipes = self.recipes
         }
     }
+    
+    //MARK: Get request
     
     func makeGETRequest(request: HTTPTask, params: [String: String]) -> Void {
         

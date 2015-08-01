@@ -14,9 +14,7 @@ import RealmSwift
 class RecipesListTableViewController: UITableViewController {
     
     var recipes: [Recipe] = []
-    
     var currentRecipe : Recipe?
-    
     var ingredients : Results<Ingredient>!
     
     override func viewDidLoad() {
@@ -30,7 +28,6 @@ class RecipesListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -41,8 +38,6 @@ class RecipesListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeTableViewCell
-        
-        // Configure the cell...
         
         let row = indexPath.row
         let recipe = recipes[row]
