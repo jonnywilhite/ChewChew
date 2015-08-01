@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,11 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
-    
-    return true
-  }
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // Inside your application(application:didFinishLaunchingWithOptions:)
+        
+        // Notice setSchemaVersion is set to 1, this is always set manually. It must be
+        // higher than the previous version (oldSchemaVersion) or an RLMException is thrown
+        setSchemaVersion(1, Realm.defaultPath, { migration, oldSchemaVersion in
+            // We haven’t migrated anything yet, so oldSchemaVersion == 0
+            if oldSchemaVersion < 1 {
+                // Nothing to do!
+                // Realm will automatically detect new properties and removed properties
+                // And will update the schema on disk automatically
+            }
+        })
+        // now that we have called `setSchemaVersion(_:_:_:)`, opening an outdated
+        // Realm will automatically perform the migration and opening the Realm will succeed
+        // i.e. Realm()
+        // Override point for customization after application launch.
+        return true
+    }
 
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

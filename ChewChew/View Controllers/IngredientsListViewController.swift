@@ -13,9 +13,20 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Variables
     
-    var selectedIngredient : Ingredient?
+    var didAddNewItem : Bool?
+    var selectedIngredient : Results<Ingredient>!
+    var beginningText : String?
+    var endingTextIsEmpty : Bool?
+    var deleteButtonTappedWhileEditing : Bool? = false
+    var isEditingTextField : Bool? = false
+    var currentIngredient : Ingredient?
     var ingredientName : String?
     
+    var ingredients : Results<Ingredient>! {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
     
@@ -43,68 +54,15 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
-        
-        if let identifier = segue.identifier {
-            let realm = Realm()
-            switch identifier {
-            case "Save":
-                let source = segue.sourceViewController as! AddIngredientViewController //1
-                
-                realm.write() {
-                    if source.currentIngredient!.name == "" {
-                        realm.delete(self.selectedIngredient!)
-                        source.currentIngredient = nil
-                    } else {
-                        self.selectedIngredient!.name = source.currentIngredient!.name
-                    }
-                }
-                
-            default:
-                println("\(identifier)")
-            }
-            
-            ingredients = realm.objects(Ingredient) //2
-        }
-    }
-    
-    @IBAction func unwindToSegue2(segue: UIStoryboardSegue) {
-        
-        if let identifier = segue.identifier {
-            let realm = Realm()
-            switch identifier {
-            case "Save":
-                let source = segue.sourceViewController as! NewIngredientViewController //1
-                
-                if source.currentIngredient!.name != "" {
-                    realm.write() {
-                        realm.add(source.currentIngredient!)
-                    }
-                }
-                
-            default:
-                println("\(identifier)")
-            }
-            
-            ingredients = realm.objects(Ingredient) //2
-        }
-    }
-    
-    var currentIngredient: Ingredient?
-    
-    var ingredients : Results<Ingredient>! {
-        didSet {
-            tableView?.reloadData()
-        }
-    }
     //MARK: Class fxns
     override func viewDidLoad() {
         clearButtonSetUp()
-        let realm = Realm()
+        
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
+        let realm = Realm()
         ingredients = realm.objects(Ingredient)
         
         // Do any additional setup after loading the view.
@@ -129,58 +87,54 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         clearButton.layer.borderColor = UIColor.redColor().CGColor
     }
     
-    //MARK: Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "Edit" {
-            let destVC: AddIngredientViewController = segue.destinationViewController as! AddIngredientViewController
-            destVC.textFieldText = ingredientName!
-        }
-    }
-    
-    
 }
 //MARK: DataSource Ext.
 extension IngredientsListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientTableViewCell //1
+        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientTableViewCell
+        cell.textField.delegate = self
         
         let row = indexPath.row
-        let ingredient = ingredients[row] as Ingredient
-        cell.ingredient = ingredient
-        cell.textLabel?.text = ingredient.name
-        cell.detailTextLabel?.text = "Edit"
-        cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
+        if ingredients.count > 0 {
+            if row < ingredients.count {
+                let ingredient = ingredients[row] as Ingredient
+                cell.ingredient = ingredient
+            } else if row == ingredients.count {
+                cell.textField.text = ""
+            }
+        } else {
+            cell.textField.text = ""
+        }
+        
         
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let ingredient = ingredients {
-            return Int(ingredients.count)
-        } else {
-            return 0
-        }
+        let realm = Realm()
+        
+        return realm.objects(Ingredient).count + 1
     }
 }
 //MARK: Delegate Ext.
 extension IngredientsListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIngredient = ingredients[indexPath.row]      //1
-        ingredientName = selectedIngredient?.name
-        self.performSegueWithIdentifier("Edit", sender: self)     //2
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! IngredientTableViewCell
+        
+        cell.textField.becomeFirstResponder()
     }
     
-    // 3
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        let realm = Realm()
+        if indexPath.row < realm.objects(Ingredient).count {
+            return true
+        } else {
+            return false
+        }
     }
     
-    // 4
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let ingredient = ingredients[indexPath.row] as Object
@@ -190,9 +144,100 @@ extension IngredientsListViewController: UITableViewDelegate {
             realm.write() {
                 realm.delete(ingredient)
             }
+            if isEditingTextField! {
+                deleteButtonTappedWhileEditing = true
+            } else {
+                deleteButtonTappedWhileEditing = false
+            }
             
-            ingredients = realm.objects(Ingredient)
+            ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
+            
+            tableView.reloadData()
         }
     }
     
+}
+
+//MARK: TextField Delegate
+
+extension IngredientsListViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.placeholder = nil
+        isEditingTextField = true
+        beginningText = textField.text
+        let realm = Realm()
+        let shareData = ShareData.sharedInstance
+        
+        if beginningText != "" {
+            let predicate = NSPredicate(format: "name = %@", beginningText!)
+            selectedIngredient = realm.objects(Ingredient).filter(predicate)
+            shareData.selectedIngredient = selectedIngredient
+            shareData.didAddNewIngredient = false
+        } else {
+            shareData.didAddNewIngredient = true
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.placeholder = "Add an Ingredient..."
+        let realm = Realm()
+        if !deleteButtonTappedWhileEditing! {
+            
+            var endingText = textField.text
+            
+            for item in realm.objects(Ingredient) {
+                if endingText == item.name {
+                    textField.text = beginningText
+                    endingText = textField.text
+                }
+            }
+            
+            if endingText == "" {
+                endingTextIsEmpty = true
+            } else {
+                endingTextIsEmpty = false
+            }
+            
+            let shareData = ShareData.sharedInstance
+            
+            if shareData.didAddNewIngredient! {
+                currentIngredient = Ingredient()
+                currentIngredient!.name = endingText
+                currentIngredient!.addedDate = NSDate()
+                if !endingTextIsEmpty! {
+                    realm.write() {
+                        realm.add(self.currentIngredient!)
+                    }
+                } else {
+                    currentIngredient = nil
+                }
+            } else {
+                currentIngredient = shareData.selectedIngredient[0] as Ingredient
+                if endingTextIsEmpty! {
+                    realm.write() {
+                        realm.delete(self.currentIngredient!)
+                    }
+                } else {
+                    realm.write() {
+                        self.currentIngredient!.name = textField.text
+                    }
+                }
+            }
+            ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
+            tableView.reloadData()
+        }
+        //textFieldShouldReturn(textField)
+        selectedIngredient = nil
+        didAddNewItem = nil
+        endingTextIsEmpty = nil
+        isEditingTextField = false
+        deleteButtonTappedWhileEditing = false
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        return false
+    }
 }

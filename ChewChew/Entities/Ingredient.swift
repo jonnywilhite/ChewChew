@@ -11,4 +11,5 @@ import RealmSwift
 
 class Ingredient : Object {
     dynamic var name : String = ""
+    dynamic var addedDate = NSDate()
 }

@@ -158,33 +158,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eB7-rX-wAd">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="472"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="Ebw-ci-4lf" detailTextLabel="PcO-Rg-S4w" style="IBUITableViewCellStyleValue1" id="i2U-yc-RC9" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i2U-yc-RC9" id="6uR-2D-jLL">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ebw-ci-4lf">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PcO-Rg-S4w">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NH-2P-6zP">
                                 <rect key="frame" x="216" y="503" width="168" height="33"/>
                                 <constraints>
@@ -199,29 +172,49 @@
                                     <action selector="buttonTapped:" destination="7BU-U6-VyA" eventType="touchUpInside" id="9ll-pN-BTV"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0wu-Za-b6o">
+                                <rect key="frame" x="0.0" y="64" width="600" height="408"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IngredientCell" id="U7e-8U-caA" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7e-8U-caA" id="3R0-YQ-Pdd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add an Ingredient..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="awg-Mp-XB4">
+                                                    <rect key="frame" x="8" y="12" width="524" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="awg-Mp-XB4" secondAttribute="trailing" constant="60" id="3DG-fV-OOU"/>
+                                                <constraint firstAttribute="centerY" secondItem="awg-Mp-XB4" secondAttribute="centerY" constant="-0.5" id="lGT-6g-Oay"/>
+                                                <constraint firstItem="awg-Mp-XB4" firstAttribute="leading" secondItem="3R0-YQ-Pdd" secondAttribute="leadingMargin" id="vdw-Fw-IS7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="awg-Mp-XB4" id="XJ0-b4-Fol"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="eB7-rX-wAd" secondAttribute="bottom" constant="128" id="FFR-z2-uxF"/>
-                            <constraint firstItem="eB7-rX-wAd" firstAttribute="top" secondItem="lL7-PY-RQO" secondAttribute="top" id="STd-g0-wd2"/>
-                            <constraint firstAttribute="trailing" secondItem="eB7-rX-wAd" secondAttribute="trailing" id="gZj-j1-XgT"/>
+                            <constraint firstItem="0wu-Za-b6o" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leading" id="Dbx-38-lbX"/>
+                            <constraint firstItem="0wu-Za-b6o" firstAttribute="top" secondItem="UHT-2H-EPe" secondAttribute="bottom" id="Lbu-X6-Gaf"/>
+                            <constraint firstAttribute="trailing" secondItem="0wu-Za-b6o" secondAttribute="trailing" id="ioz-8w-Ygf"/>
                             <constraint firstAttribute="centerX" secondItem="2NH-2P-6zP" secondAttribute="centerX" id="kTk-ux-LgB"/>
+                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="0wu-Za-b6o" secondAttribute="bottom" constant="128" id="ks7-1t-J03"/>
                             <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="64" id="lMF-Bs-haf"/>
-                            <constraint firstItem="eB7-rX-wAd" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leading" id="xqN-57-QAq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Ingredients List" id="dGJ-qD-ij7">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="dfP-Pa-tt9"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PRK-2B-Chh">
-                            <connections>
-                                <segue destination="dt0-XA-3el" kind="show" identifier="Add" id="w4M-g0-KdM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Ingredients List" id="dGJ-qD-ij7"/>
                     <connections>
                         <outlet property="clearButton" destination="2NH-2P-6zP" id="Dnq-yZ-jiy"/>
-                        <outlet property="tableView" destination="eB7-rX-wAd" id="B1W-dD-dhC"/>
-                        <segue destination="xbu-ET-0J0" kind="show" identifier="Edit" id="oxk-Ri-BWz"/>
+                        <outlet property="tableView" destination="0wu-Za-b6o" id="Sna-ed-LBY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MqL-I3-M2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -306,114 +299,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCd-il-FyB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2262" y="1031"/>
-        </scene>
-        <!--Add New Ingredient-->
-        <scene sceneID="JzM-qO-SnG">
-            <objects>
-                <viewController title="Add New Ingredient" id="dt0-XA-3el" customClass="NewIngredientViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VSg-AO-qt2"/>
-                        <viewControllerLayoutGuide type="bottom" id="2f3-uS-jgG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tx5-BN-6mm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Ingredient Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxv-Tf-IJZ">
-                                <rect key="frame" x="16" y="128" width="182" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebx-qb-npu">
-                                <rect key="frame" x="206" y="124" width="378" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ebx-qb-npu" firstAttribute="leading" secondItem="Pxv-Tf-IJZ" secondAttribute="trailing" constant="8" id="1NY-g8-r2w"/>
-                            <constraint firstItem="Pxv-Tf-IJZ" firstAttribute="top" secondItem="VSg-AO-qt2" secondAttribute="bottom" constant="64" id="XuR-Aj-UeE"/>
-                            <constraint firstItem="Pxv-Tf-IJZ" firstAttribute="leading" secondItem="Tx5-BN-6mm" secondAttribute="leadingMargin" id="abr-ml-eHP"/>
-                            <constraint firstItem="ebx-qb-npu" firstAttribute="trailing" secondItem="Tx5-BN-6mm" secondAttribute="trailingMargin" id="kCC-1p-BHh"/>
-                            <constraint firstItem="ebx-qb-npu" firstAttribute="top" secondItem="VSg-AO-qt2" secondAttribute="bottom" constant="60" id="mx0-2Y-3ys"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add New Ingredient" id="0gw-Mt-FwG">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="buw-1I-FIt">
-                            <connections>
-                                <segue destination="T47-Yy-mn7" kind="unwind" identifier="Cancel" unwindAction="unwindToSegue2:" id="xpn-IM-HBE"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cNs-xy-vtv">
-                            <connections>
-                                <segue destination="T47-Yy-mn7" kind="unwind" identifier="Save" unwindAction="unwindToSegue2:" id="s6A-Ke-Vpa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="textField" destination="ebx-qb-npu" id="nWY-7s-8Ak"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="75o-tb-16h" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="T47-Yy-mn7" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="3291" y="-412"/>
-        </scene>
-        <!--Edit Ingredient-->
-        <scene sceneID="DvT-ic-BJq">
-            <objects>
-                <viewController title="Edit Ingredient" id="xbu-ET-0J0" customClass="AddIngredientViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G9u-n3-t2M"/>
-                        <viewControllerLayoutGuide type="bottom" id="Rvf-f1-PJN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PUg-6F-Px0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Ingredient Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkr-VB-3zR">
-                                <rect key="frame" x="16" y="128" width="182" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o17-Cx-81z">
-                                <rect key="frame" x="206" y="124" width="378" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="wkr-VB-3zR" firstAttribute="top" secondItem="G9u-n3-t2M" secondAttribute="bottom" constant="64" id="Dj3-BO-8qa"/>
-                            <constraint firstItem="o17-Cx-81z" firstAttribute="top" secondItem="G9u-n3-t2M" secondAttribute="bottom" constant="60" id="Rib-Ev-uGW"/>
-                            <constraint firstItem="o17-Cx-81z" firstAttribute="leading" secondItem="wkr-VB-3zR" secondAttribute="trailing" constant="8" id="ViK-xX-eoB"/>
-                            <constraint firstItem="o17-Cx-81z" firstAttribute="trailing" secondItem="PUg-6F-Px0" secondAttribute="trailingMargin" id="YOg-ym-nkp"/>
-                            <constraint firstItem="wkr-VB-3zR" firstAttribute="leading" secondItem="PUg-6F-Px0" secondAttribute="leadingMargin" id="cib-hZ-Lcv"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Edit Ingredient" id="b7h-QN-aNY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Mpj-R2-2ZN">
-                            <connections>
-                                <segue destination="XjQ-oW-b4j" kind="unwind" identifier="Cancel" unwindAction="unwindToSegue:" id="nhW-Z7-MEb"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="b3P-75-Qdx">
-                            <connections>
-                                <segue destination="XjQ-oW-b4j" kind="unwind" identifier="Save" unwindAction="unwindToSegue:" id="ANf-WX-9EY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="textField" destination="o17-Cx-81z" id="r7j-ci-JxL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w7m-CZ-ukf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="XjQ-oW-b4j" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="3421" y="278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AGV-Bl-ehV">

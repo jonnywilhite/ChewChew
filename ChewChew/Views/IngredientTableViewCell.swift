@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 class IngredientTableViewCell: UITableViewCell {
+    var currentText: String?
+    var selectedItem: Results<Ingredient>!
     
-    @IBOutlet weak var ingredientName : UILabel!
+    @IBOutlet weak var textField : UITextField!
     
     var ingredient : Ingredient? {
         didSet {
-            if let ingredient = ingredient, ingredientName = ingredientName {
-                self.ingredientName.text = ingredient.name
+            if let ingredient = ingredient, textField = textField {
+                self.textField.text = ingredient.name
             }
         }
     }
