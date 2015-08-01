@@ -22,6 +22,7 @@
 		62EAE6661AD844C90069D0EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62EAE6641AD844C90069D0EC /* Main.storyboard */; };
 		62EAE6681AD844C90069D0EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62EAE6671AD844C90069D0EC /* Images.xcassets */; };
 		62EAE66B1AD844C90069D0EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62EAE6691AD844C90069D0EC /* LaunchScreen.xib */; };
+		B477DB161B6D58FE009972EA /* KeyboardNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B477DB151B6D58FE009972EA /* KeyboardNotificationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		62EAE6651AD844C90069D0EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62EAE6671AD844C90069D0EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		62EAE66A1AD844C90069D0EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B477DB151B6D58FE009972EA /* KeyboardNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			children = (
 				62EAE6541AD8432A0069D0EC /* UIViewController+PresentAnywhere.swift */,
 				62BD2B321ADC4F8F0033B65F /* TimelineComponent.swift */,
+				B477DB151B6D58FE009972EA /* KeyboardNotificationHandler.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			files = (
 				62EAE6571AD8436B0069D0EC /* UIViewController+PresentAnywhere.swift in Sources */,
 				62BD2B331ADC4F8F0033B65F /* TimelineComponent.swift in Sources */,
+				B477DB161B6D58FE009972EA /* KeyboardNotificationHandler.swift in Sources */,
 				625441991AE179470029A633 /* Array+RemoveObject.swift in Sources */,
 				62BD2B311ADC43100033B65F /* Delay.swift in Sources */,
 				62745A7A1B21081A00B9D9F0 /* NSCacheSwift.swift in Sources */,

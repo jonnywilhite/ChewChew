@@ -8,10 +8,12 @@
 
 import UIKit
 import RealmSwift
+import Foundation
+import ConvenienceKit
 
 class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
-    //MARK: Variables
+    //MARK: Variables/Outlets/Actions
     
     var didAddNewItem : Bool?
     var selectedIngredient : Results<Ingredient>!
@@ -29,6 +31,9 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     }
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
+    
+    @IBOutlet weak var tableViewBottomSpace : NSLayoutConstraint!
+    var keyboardNotificationHandler : KeyboardNotificationHandler?
     
     @IBAction func buttonTapped(sender: AnyObject) {
         
@@ -57,15 +62,36 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     //MARK: Class fxns
     override func viewDidLoad() {
         clearButtonSetUp()
-        
         super.viewDidLoad()
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         let realm = Realm()
-        ingredients = realm.objects(Ingredient)
+        ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        keyboardNotificationHandler = KeyboardNotificationHandler()
+        
+        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                self.tableViewBottomSpace.constant = 128
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                self.tableViewBottomSpace.constant = height + 8
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,7 +101,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     func getNumberOfIngredients() -> Int {
         let realm = Realm()
-        ingredients = realm.objects(Ingredient)
+        ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         let num = ingredients.count
         return num
     }
@@ -85,6 +111,11 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         clearButton.layer.cornerRadius = 5
         clearButton.layer.borderWidth = 1
         clearButton.layer.borderColor = UIColor.redColor().CGColor
+    }
+    
+    func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 }

@@ -215,6 +215,7 @@
                     <connections>
                         <outlet property="clearButton" destination="2NH-2P-6zP" id="Dnq-yZ-jiy"/>
                         <outlet property="tableView" destination="0wu-Za-b6o" id="Sna-ed-LBY"/>
+                        <outlet property="tableViewBottomSpace" destination="ks7-1t-J03" id="UQq-rU-R65"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MqL-I3-M2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
