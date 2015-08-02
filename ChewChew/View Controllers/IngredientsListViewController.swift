@@ -29,7 +29,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
             tableView?.reloadData()
         }
     }
-    var ingredientsInPantry : Results<Ingredient>!
+    var pantryIngredients : Results<Ingredient>!
     
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
@@ -74,7 +74,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
-        ingredientsInPantry = ingredients.filter("category = 'pantry'")
+        pantryIngredients = realm.objects(Ingredient).filter("category = 'pantry'")
         
         // Do any additional setup after loading the view.
     }
@@ -226,7 +226,7 @@ extension IngredientsListViewController: UITextFieldDelegate {
             var endingText = textField.text
             
             for item in realm.objects(Ingredient) {
-                if endingText == item.name {
+                if endingText.caseInsensitiveCompare(item.name) == NSComparisonResult(rawValue: 0) {
                     textField.text = beginningText
                     endingText = textField.text
                     break
@@ -240,12 +240,20 @@ extension IngredientsListViewController: UITextFieldDelegate {
             }
             
             let shareData = ShareData.sharedInstance
+            let pantry = Pantry.sharedInstance
             
             if shareData.didAddNewIngredient! {
                 currentIngredient = Ingredient()
                 currentIngredient!.name = endingText
                 currentIngredient!.addedDate = NSDate()
-                currentIngredient!.category = "user-specific"
+                for name in pantry.listOfAllIngredients {
+                    if currentIngredient!.name.caseInsensitiveCompare(name) == NSComparisonResult(rawValue: 0) {
+                        currentIngredient!.category = "pantry"
+                        break
+                    } else {
+                        currentIngredient!.category = "user-specific"
+                    }
+                }
                 if !endingTextIsEmpty! {
                     realm.write() {
                         realm.add(self.currentIngredient!)

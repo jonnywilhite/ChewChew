@@ -23,6 +23,7 @@ class Pantry {
         return Static.instance!
     }
     
-    var listOfIngredients : String = ""
+    var listOfCurrentIngredients : String = ""
+    var listOfAllIngredients : [String] = ["salt", "pepper", "milk", "butter", "flour", "sugar", "beef", "chicken", "eggs", "cheese"]
     
 }
