@@ -41,7 +41,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Pantry" footerTitle=" " id="zbf-7a-Q3w">
+                            <tableViewSection headerTitle="Pantry" footerTitle="A list of common household ingredients that can be added to your list with a single tap" id="zbf-7a-Q3w">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PantryCell" textLabel="a4E-J4-Y8E" detailTextLabel="1aV-k8-F8Y" style="IBUITableViewCellStyleValue1" id="aIV-VB-KUS" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
