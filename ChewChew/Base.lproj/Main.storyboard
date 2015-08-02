@@ -16,7 +16,7 @@
                         <sections>
                             <tableViewSection headerTitle="Ingredients List" id="cPE-pB-qYu">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientNumberCell" textLabel="AD7-p8-2Q5" detailTextLabel="b8y-sZ-Ach" style="IBUITableViewCellStyleValue1" id="Oyf-Hu-Mcu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FirstCell" textLabel="AD7-p8-2Q5" detailTextLabel="b8y-sZ-Ach" style="IBUITableViewCellStyleValue1" id="Oyf-Hu-Mcu" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oyf-Hu-Mcu" id="ao1-x5-3Gv">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -43,7 +43,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Pantry" footerTitle="A list of common household ingredients that can be added to your list with a single tap" id="zbf-7a-Q3w">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PantryCell" textLabel="a4E-J4-Y8E" detailTextLabel="1aV-k8-F8Y" style="IBUITableViewCellStyleValue1" id="aIV-VB-KUS" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PantryCell" textLabel="a4E-J4-Y8E" detailTextLabel="1aV-k8-F8Y" style="IBUITableViewCellStyleValue1" id="aIV-VB-KUS" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aIV-VB-KUS" id="vWN-9y-xQl">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -67,7 +67,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="NIB-hm-CUv">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="VHi-me-erq" style="IBUITableViewCellStyleDefault" id="kT9-ok-cc3" customClass="MealTypeTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="VHi-me-erq" style="IBUITableViewCellStyleDefault" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kT9-ok-cc3" id="pc8-Rj-JXk">
                                             <autoresizingMask key="autoresizingMask"/>

@@ -50,6 +50,8 @@
 		B477DB1F1B6DD6A4009972EA /* PantryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B477DB1E1B6DD6A4009972EA /* PantryTableViewCell.swift */; };
 		B48E56071B62FC2C00B81443 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48E56061B62FC2C00B81443 /* SwiftyJSON.swift */; };
 		B4AB3DA01B6E81B90089151E /* PantryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AB3D9F1B6E81B90089151E /* PantryConstants.swift */; };
+		B4AB3DA21B6EA76D0089151E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AB3DA11B6EA76D0089151E /* TableViewCell.swift */; };
+		B4AB3DA41B6EA9B90089151E /* SearchHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AB3DA31B6EA9B90089151E /* SearchHandling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +190,8 @@
 		B477DB1E1B6DD6A4009972EA /* PantryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantryTableViewCell.swift; sourceTree = "<group>"; };
 		B48E56061B62FC2C00B81443 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B4AB3D9F1B6E81B90089151E /* PantryConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantryConstants.swift; sourceTree = "<group>"; };
+		B4AB3DA11B6EA76D0089151E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		B4AB3DA31B6EA9B90089151E /* SearchHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +327,7 @@
 				B476419A1B6A148A000D5FD8 /* ParseLoginHelper.swift */,
 				B46B1C731B6C86B30003A14B /* ShareData.swift */,
 				B477DB1A1B6DCF09009972EA /* Pantry.swift */,
+				B4AB3DA31B6EA9B90089151E /* SearchHandling.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				B47641A61B6A148A000D5FD8 /* MealTypeTableViewCell.swift */,
 				B47641A71B6A148A000D5FD8 /* RecipeTableViewCell.swift */,
 				B477DB1E1B6DD6A4009972EA /* PantryTableViewCell.swift */,
+				B4AB3DA11B6EA76D0089151E /* TableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				B4AB3DA01B6E81B90089151E /* PantryConstants.swift in Sources */,
 				B47641A81B6A148A000D5FD8 /* AppDelegate.swift in Sources */,
 				B477DB141B6D40E4009972EA /* ViewConstants.swift in Sources */,
+				B4AB3DA21B6EA76D0089151E /* TableViewCell.swift in Sources */,
 				B477DB1B1B6DCF09009972EA /* Pantry.swift in Sources */,
 				B47641AB1B6A148A000D5FD8 /* Ingredient.swift in Sources */,
 				B47641AC1B6A148A000D5FD8 /* Recipe.swift in Sources */,
@@ -588,6 +595,7 @@
 				B47641B61B6A148A000D5FD8 /* IngredientTableViewCell.swift in Sources */,
 				B477DB1F1B6DD6A4009972EA /* PantryTableViewCell.swift in Sources */,
 				B47641B21B6A148A000D5FD8 /* HomeTableViewController.swift in Sources */,
+				B4AB3DA41B6EA9B90089151E /* SearchHandling.swift in Sources */,
 				B477DB1D1B6DD2FF009972EA /* PantryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
