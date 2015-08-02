@@ -31,7 +31,6 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     }
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
-    @IBOutlet weak var searchButton : UIButton!
     
     @IBOutlet weak var tableViewBottomSpace : NSLayoutConstraint!
     var keyboardNotificationHandler : KeyboardNotificationHandler?
@@ -63,7 +62,6 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     //MARK: Class fxns
     override func viewDidLoad() {
         buttonSetUp(clearButton)
-        buttonSetUp(searchButton)
         super.viewDidLoad()
         
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")

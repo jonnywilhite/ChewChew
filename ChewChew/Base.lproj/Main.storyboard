@@ -159,7 +159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NH-2P-6zP">
-                                <rect key="frame" x="216" y="493" width="168" height="33"/>
+                                <rect key="frame" x="216" y="513" width="168" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="168" id="Xbi-gp-4g8"/>
                                 </constraints>
@@ -172,64 +172,50 @@
                                     <action selector="buttonTapped:" destination="7BU-U6-VyA" eventType="touchUpInside" id="9ll-pN-BTV"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0wu-Za-b6o">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1QB-gU-0Fp">
                                 <rect key="frame" x="0.0" y="64" width="600" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IngredientCell" id="U7e-8U-caA" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IngredientCell" id="4im-jy-CSB" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7e-8U-caA" id="3R0-YQ-Pdd">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4im-jy-CSB" id="rff-yf-gVF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add an Ingredient..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="awg-Mp-XB4">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add an Ingredient..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AUy-zi-iuj">
                                                     <rect key="frame" x="8" y="12" width="524" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="awg-Mp-XB4" secondAttribute="trailing" constant="60" id="3DG-fV-OOU"/>
-                                                <constraint firstAttribute="centerY" secondItem="awg-Mp-XB4" secondAttribute="centerY" constant="-0.5" id="lGT-6g-Oay"/>
-                                                <constraint firstItem="awg-Mp-XB4" firstAttribute="leading" secondItem="3R0-YQ-Pdd" secondAttribute="leadingMargin" id="vdw-Fw-IS7"/>
+                                                <constraint firstItem="AUy-zi-iuj" firstAttribute="leading" secondItem="rff-yf-gVF" secondAttribute="leadingMargin" id="6yY-7T-VTm"/>
+                                                <constraint firstAttribute="centerY" secondItem="AUy-zi-iuj" secondAttribute="centerY" constant="-0.5" id="ec0-Ge-QeN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="AUy-zi-iuj" secondAttribute="trailing" constant="60" id="fjc-dw-QXf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="textField" destination="awg-Mp-XB4" id="XJ0-b4-Fol"/>
+                                            <outlet property="textField" destination="AUy-zi-iuj" id="B7t-kf-tSH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvU-8E-xIS">
-                                <rect key="frame" x="216" y="543" width="168" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="168" id="m7z-B6-7mT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Search Recipes">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="cvU-8E-xIS" secondAttribute="centerX" id="2Pr-ui-cyJ"/>
-                            <constraint firstItem="0wu-Za-b6o" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leading" id="Dbx-38-lbX"/>
-                            <constraint firstItem="0wu-Za-b6o" firstAttribute="top" secondItem="UHT-2H-EPe" secondAttribute="bottom" id="Lbu-X6-Gaf"/>
-                            <constraint firstAttribute="trailing" secondItem="0wu-Za-b6o" secondAttribute="trailing" id="ioz-8w-Ygf"/>
+                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="1QB-gU-0Fp" secondAttribute="bottom" constant="128" id="WQ4-Iu-XRg"/>
+                            <constraint firstItem="1QB-gU-0Fp" firstAttribute="top" secondItem="UHT-2H-EPe" secondAttribute="bottom" id="hVu-yX-W6l"/>
                             <constraint firstAttribute="centerX" secondItem="2NH-2P-6zP" secondAttribute="centerX" id="kTk-ux-LgB"/>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="0wu-Za-b6o" secondAttribute="bottom" constant="128" id="ks7-1t-J03"/>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="74" id="lMF-Bs-haf"/>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="cvU-8E-xIS" secondAttribute="bottom" constant="24" id="m2R-is-bAx"/>
+                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="54" id="lMF-Bs-haf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1QB-gU-0Fp" secondAttribute="trailing" constant="-16" id="lhv-aS-sga"/>
+                            <constraint firstItem="1QB-gU-0Fp" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leadingMargin" constant="-16" id="tDb-Q9-kbI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Ingredients List" id="dGJ-qD-ij7"/>
                     <connections>
                         <outlet property="clearButton" destination="2NH-2P-6zP" id="Dnq-yZ-jiy"/>
-                        <outlet property="searchButton" destination="cvU-8E-xIS" id="SMq-Sb-n0C"/>
-                        <outlet property="tableView" destination="0wu-Za-b6o" id="Sna-ed-LBY"/>
-                        <outlet property="tableViewBottomSpace" destination="ks7-1t-J03" id="UQq-rU-R65"/>
+                        <outlet property="tableView" destination="1QB-gU-0Fp" id="eCU-Yw-mmZ"/>
+                        <outlet property="tableViewBottomSpace" destination="WQ4-Iu-XRg" id="T41-14-a4o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MqL-I3-M2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
