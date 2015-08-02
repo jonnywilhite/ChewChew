@@ -159,7 +159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NH-2P-6zP">
-                                <rect key="frame" x="216" y="503" width="168" height="33"/>
+                                <rect key="frame" x="216" y="493" width="168" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="168" id="Xbi-gp-4g8"/>
                                 </constraints>
@@ -200,20 +200,34 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvU-8E-xIS">
+                                <rect key="frame" x="216" y="543" width="168" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="m7z-B6-7mT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Search Recipes">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="cvU-8E-xIS" secondAttribute="centerX" id="2Pr-ui-cyJ"/>
                             <constraint firstItem="0wu-Za-b6o" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leading" id="Dbx-38-lbX"/>
                             <constraint firstItem="0wu-Za-b6o" firstAttribute="top" secondItem="UHT-2H-EPe" secondAttribute="bottom" id="Lbu-X6-Gaf"/>
                             <constraint firstAttribute="trailing" secondItem="0wu-Za-b6o" secondAttribute="trailing" id="ioz-8w-Ygf"/>
                             <constraint firstAttribute="centerX" secondItem="2NH-2P-6zP" secondAttribute="centerX" id="kTk-ux-LgB"/>
                             <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="0wu-Za-b6o" secondAttribute="bottom" constant="128" id="ks7-1t-J03"/>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="64" id="lMF-Bs-haf"/>
+                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="74" id="lMF-Bs-haf"/>
+                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="cvU-8E-xIS" secondAttribute="bottom" constant="24" id="m2R-is-bAx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Ingredients List" id="dGJ-qD-ij7"/>
                     <connections>
                         <outlet property="clearButton" destination="2NH-2P-6zP" id="Dnq-yZ-jiy"/>
+                        <outlet property="searchButton" destination="cvU-8E-xIS" id="SMq-Sb-n0C"/>
                         <outlet property="tableView" destination="0wu-Za-b6o" id="Sna-ed-LBY"/>
                         <outlet property="tableViewBottomSpace" destination="ks7-1t-J03" id="UQq-rU-R65"/>
                     </connections>

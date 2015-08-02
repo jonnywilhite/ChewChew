@@ -31,6 +31,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     }
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
+    @IBOutlet weak var searchButton : UIButton!
     
     @IBOutlet weak var tableViewBottomSpace : NSLayoutConstraint!
     var keyboardNotificationHandler : KeyboardNotificationHandler?
@@ -61,7 +62,8 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Class fxns
     override func viewDidLoad() {
-        clearButtonSetUp()
+        buttonSetUp(clearButton)
+        buttonSetUp(searchButton)
         super.viewDidLoad()
         
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
@@ -106,11 +108,16 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         return num
     }
     
-    func clearButtonSetUp() {
-        clearButton.backgroundColor = UIColor.redColor()
-        clearButton.layer.cornerRadius = 5
-        clearButton.layer.borderWidth = 1
-        clearButton.layer.borderColor = UIColor.redColor().CGColor
+    func buttonSetUp(button: UIButton) {
+        if button == clearButton {
+            button.backgroundColor = UIColor.redColor()
+            button.layer.borderColor = UIColor.redColor().CGColor
+        } else {
+            button.backgroundColor = UIColor(red: 43.0/255.0, green: 190.0/255.0, blue: 0, alpha: 1.0)
+            button.layer.borderColor = UIColor(red: 43.0/255.0, green: 190.0/255.0, blue: 0, alpha: 1.0).CGColor
+        }
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
     }
     
     func DismissKeyboard(){
