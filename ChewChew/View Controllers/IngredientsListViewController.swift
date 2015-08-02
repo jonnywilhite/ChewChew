@@ -66,7 +66,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         buttonSetUp(clearButton)
         super.viewDidLoad()
         
-        tap = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -86,6 +86,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
             UIView.animateWithDuration(0.3) {
                 self.tableViewBottomSpace.constant = 128
                 self.view.layoutIfNeeded()
+                self.view.removeGestureRecognizer(self.tap)
             }
         }
         
@@ -93,6 +94,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
             UIView.animateWithDuration(0.3) {
                 self.tableViewBottomSpace.constant = height + 8
                 self.view.layoutIfNeeded()
+                self.view.addGestureRecognizer(self.tap)
             }
         }
     }
@@ -119,7 +121,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         button.layer.borderWidth = 1
     }
     
-    func DismissKeyboard(){
+    func dismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
@@ -283,7 +285,6 @@ extension IngredientsListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
-        
         return false
     }
 }
