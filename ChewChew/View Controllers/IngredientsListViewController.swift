@@ -15,6 +15,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Variables/Outlets/Actions
     
+    var tap: UITapGestureRecognizer!
     var selectedIngredient : Results<Ingredient>!
     var beginningText : String?
     var endingTextIsEmpty : Bool?
@@ -65,8 +66,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         buttonSetUp(clearButton)
         super.viewDidLoad()
         
-        /*var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)*/
+        tap = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         
         tableView.dataSource = self
         tableView.delegate = self
