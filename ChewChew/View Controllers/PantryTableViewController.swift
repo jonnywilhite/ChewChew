@@ -64,7 +64,7 @@ class PantryTableViewController: UITableViewController {
         let realm = Realm()
         
         for ingredient in ingredients {
-            if cell.textLabel?.text == ingredient.name {
+            if (cell.textLabel?.text)!.caseInsensitiveCompare(ingredient.name) == NSComparisonResult(rawValue: 0) {
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
         }
@@ -88,7 +88,7 @@ class PantryTableViewController: UITableViewController {
             
         } else {
             for ingredient in ingredients {
-                if currentPantryIngredient!.name == ingredient.name {
+                if currentPantryIngredient!.name.caseInsensitiveCompare(ingredient.name) == NSComparisonResult(rawValue: 0) {
                     currentPantryIngredient = ingredient
                     break
                 }

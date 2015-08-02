@@ -29,6 +29,8 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
             tableView?.reloadData()
         }
     }
+    var ingredientsInPantry : Results<Ingredient>!
+    
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
     
@@ -72,6 +74,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
+        ingredientsInPantry = ingredients.filter("category = 'pantry'")
         
         // Do any additional setup after loading the view.
     }
