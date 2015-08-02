@@ -15,7 +15,6 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Variables/Outlets/Actions
     
-    var didAddNewItem : Bool?
     var selectedIngredient : Results<Ingredient>!
     var beginningText : String?
     var endingTextIsEmpty : Bool?
@@ -39,7 +38,6 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     var keyboardNotificationHandler : KeyboardNotificationHandler?
     
     @IBAction func buttonTapped(sender: AnyObject) {
-        
         let realm = Realm()
         self.tableView.dataSource = self
         
@@ -278,7 +276,6 @@ extension IngredientsListViewController: UITextFieldDelegate {
         }
         //textFieldShouldReturn(textField)
         selectedIngredient = nil
-        didAddNewItem = nil
         endingTextIsEmpty = nil
         isEditingTextField = false
         deleteButtonTappedWhileEditing = false
