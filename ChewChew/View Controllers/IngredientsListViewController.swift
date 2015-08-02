@@ -41,14 +41,14 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         let realm = Realm()
         self.tableView.dataSource = self
         
-        if realm.objects(Ingredient).count > 0 {
+        if realm.objects(Ingredient).filter("category = 'user-specific'").count > 0 {
             let alertController = UIAlertController(title: "Clear All Ingredients?", message: "This can't be undone!", preferredStyle: UIAlertControllerStyle.Alert)
             
             alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
                 
                 
                 realm.write() {
-                    realm.deleteAll()
+                    realm.delete(self.userOnlyIngredients)
                 }
                 self.tableView.reloadData()
             }))
@@ -65,8 +65,8 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         buttonSetUp(clearButton)
         super.viewDidLoad()
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)
+        /*var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)*/
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -165,7 +165,7 @@ extension IngredientsListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let realm = Realm()
-        if indexPath.row < realm.objects(Ingredient).count {
+        if indexPath.row < realm.objects(Ingredient).filter("category = 'user-specific'").count {
             return true
         } else {
             return false
