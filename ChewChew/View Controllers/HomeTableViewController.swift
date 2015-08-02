@@ -44,27 +44,17 @@ class HomeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("MealTypeCell") as? UITableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("PantryCell") as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "IngredientNumberCell")
         }
         if (indexPath.section == 1) {
-            var enabledSwitch = UISwitch(frame: CGRectZero) as UISwitch
-            enabledSwitch.on = false
-            cell!.accessoryView = enabledSwitch
             
-            switch indexPath.row {
-            case 0:
-                cell!.textLabel?.text = "Breakfast"
-            case 1:
-                cell!.textLabel?.text = "Lunch"
-            case 2:
-                cell!.textLabel?.text = "Dinner"
-            case 3:
-                cell!.textLabel?.text = "Dessert"
-            default:
-                cell!.textLabel?.text = "FOOD"
-            }
+            cell!.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
+            
+            cell!.textLabel?.text = "0 Items Checked"
+            cell!.detailTextLabel?.text = "View Pantry"
+            
         } else if (indexPath.section == 0) {
             let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
             if x == 1 {
@@ -79,17 +69,14 @@ class HomeTableViewController: UITableViewController {
             cell!.textLabel?.text = "Search Recipes"
             var myColor = UIColor(red: 24.0/255.0, green: 108.0/255.0, blue: 254.0/255.0, alpha: 1.0)
             cell!.textLabel?.textColor = myColor
+            cell!.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
         }
         
         return cell!
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if (indexPath.section == 1) {
-            return nil
-        } else {
-            return indexPath
-        }
+        return indexPath
     }
     
     //MARK: Navigation
@@ -97,6 +84,9 @@ class HomeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
             self.performSegueWithIdentifier("ShowIngredients", sender: self)
+        } else if (indexPath.section == 1) {
+            self.performSegueWithIdentifier("ShowPantry", sender: self)
+            
         } else if (indexPath.section == 2) {
             let realm = Realm()
             ingredients = realm.objects(Ingredient)

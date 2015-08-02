@@ -242,6 +242,7 @@ extension IngredientsListViewController: UITextFieldDelegate {
                 currentIngredient = Ingredient()
                 currentIngredient!.name = endingText
                 currentIngredient!.addedDate = NSDate()
+                currentIngredient!.category = "user-specific"
                 if !endingTextIsEmpty! {
                     realm.write() {
                         realm.add(self.currentIngredient!)
