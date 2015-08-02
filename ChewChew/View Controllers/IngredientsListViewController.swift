@@ -30,6 +30,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         }
     }
     var pantryIngredients : Results<Ingredient>!
+    var userOnlyIngredients : Results<Ingredient>!
     
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var clearButton : UIButton!
@@ -75,6 +76,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         pantryIngredients = realm.objects(Ingredient).filter("category = 'pantry'")
+        userOnlyIngredients = realm.objects(Ingredient).filter("category = 'user-specific'")
         
         // Do any additional setup after loading the view.
     }
@@ -135,11 +137,11 @@ extension IngredientsListViewController: UITableViewDataSource {
         cell.textField.delegate = self
         
         let row = indexPath.row
-        if ingredients.count > 0 {
-            if row < ingredients.count {
-                let ingredient = ingredients[row] as Ingredient
+        if userOnlyIngredients.count > 0 {
+            if row < userOnlyIngredients.count {
+                let ingredient = userOnlyIngredients[row] as Ingredient
                 cell.ingredient = ingredient
-            } else if row == ingredients.count {
+            } else if row == userOnlyIngredients.count {
                 cell.textField.text = ""
             }
         } else {
@@ -153,7 +155,7 @@ extension IngredientsListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let realm = Realm()
         
-        return realm.objects(Ingredient).count + 1
+        return realm.objects(Ingredient).filter("category = 'user-specific'").count + 1
     }
 }
 //MARK: Delegate Ext.
