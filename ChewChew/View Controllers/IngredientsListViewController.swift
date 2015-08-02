@@ -106,9 +106,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     func getNumberOfIngredients() -> Int {
         let realm = Realm()
-        ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
-        let num = ingredients.count
-        return num
+        return realm.objects(Ingredient).filter("category = 'user-specific'").count
     }
     
     func buttonSetUp(button: UIButton) {

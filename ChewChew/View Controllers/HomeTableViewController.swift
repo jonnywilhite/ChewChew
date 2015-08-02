@@ -52,15 +52,19 @@ class HomeTableViewController: UITableViewController {
             
             cell!.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
             
-            cell!.textLabel?.text = "0 Items Checked"
+            let y = PantryTableViewController.getNumberOfIngredients(PantryTableViewController())()
+            if y == 1 {
+                cell!.textLabel?.text = "\(y) Item Checked"
+            } else {
+                cell!.textLabel?.text = "\(y) Items Checked"
+            }
             cell!.detailTextLabel?.text = "View Pantry"
             
         } else if (indexPath.section == 0) {
             let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
             if x == 1 {
                 cell!.textLabel?.text = "\(x) Item"
-            }
-            else {
+            } else {
                 cell!.textLabel?.text = "\(x) Items"
             }
             cell!.detailTextLabel?.text = "View Full List"

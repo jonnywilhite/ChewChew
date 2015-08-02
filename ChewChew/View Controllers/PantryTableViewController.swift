@@ -104,6 +104,11 @@ class PantryTableViewController: UITableViewController {
         
     }
     
+    func getNumberOfIngredients() -> Int {
+        let realm = Realm()
+        return realm.objects(Ingredient).filter("category = 'pantry'").count
+    }
+    
     func setUpPantry() {
         pantryIngredients = []
         
