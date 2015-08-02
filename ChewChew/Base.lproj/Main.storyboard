@@ -291,7 +291,16 @@
                             <outlet property="delegate" destination="08q-pa-yvm" id="gcO-Fd-PJf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pantry" id="vSE-2K-Xxr"/>
+                    <navigationItem key="navigationItem" title="Pantry" id="vSE-2K-Xxr">
+                        <barButtonItem key="rightBarButtonItem" title="Uncheck All" id="TvO-0j-bHl">
+                            <connections>
+                                <action selector="checkOrUncheckAll:" destination="08q-pa-yvm" id="WhS-BZ-Vf2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="checkUncheckAllButton" destination="TvO-0j-bHl" id="kyM-pR-iDA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FId-Co-xP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

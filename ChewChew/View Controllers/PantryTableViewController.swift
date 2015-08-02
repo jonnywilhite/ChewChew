@@ -13,7 +13,44 @@ class PantryTableViewController: UITableViewController {
     
     var ingredients : Results<Ingredient>!
     var pantryIngredients : [Ingredient] = []
+    var ingredientsInPantry : Results<Ingredient>!
+    var ingredientsToCheck : Results<Ingredient>!
     var currentPantryIngredient : Ingredient?
+    
+    @IBOutlet weak var checkUncheckAllButton : UIBarButtonItem!
+    @IBAction func checkOrUncheckAll(sender: UIBarButtonItem) {
+        let realm = Realm()
+        ingredientsInPantry = realm.objects(Ingredient).filter("category = 'pantry'")
+        if ingredientsInPantry.count == 10 {
+            realm.write() {
+                realm.delete(self.ingredientsInPantry)
+            }
+            tableView.reloadData()
+            self.viewDidLoad()
+            sender.title = "Check All"
+        } else {
+            for potentialIngredient in pantryIngredients {
+                var matchesExistingIngredient = false
+                
+                for existingIngredient in ingredientsInPantry {
+                    if potentialIngredient.name == existingIngredient.name {
+                        matchesExistingIngredient = true
+                        break
+                    }
+                }
+                if !matchesExistingIngredient {
+                    potentialIngredient.addedDate = NSDate()
+                    realm.write() {
+                        realm.add(potentialIngredient)
+                    }
+                }
+            }
+            tableView.reloadData()
+            self.viewDidLoad()
+            sender.title = "Uncheck All"
+        }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +60,12 @@ class PantryTableViewController: UITableViewController {
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         setUpPantry()
+        
+        if realm.objects(Ingredient).filter("category = 'pantry'").count == 10 {
+            self.checkUncheckAllButton.title = "Uncheck All"
+        } else {
+            self.checkUncheckAllButton.title = "Check All"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,13 +90,18 @@ class PantryTableViewController: UITableViewController {
         cell.ingredient = pIngredient
         
         let realm = Realm()
-        
+        var ingredientIsInTheList = false
         for ingredient in ingredients {
             if (cell.textLabel?.text)!.caseInsensitiveCompare(ingredient.name) == NSComparisonResult(rawValue: 0) {
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                ingredientIsInTheList = true
+                break
             }
         }
-
+        if ingredientIsInTheList {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
         return cell
     }
     
@@ -83,6 +131,11 @@ class PantryTableViewController: UITableViewController {
             }
         }
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
+        if ingredients.filter("category = 'pantry'").count == 10 {
+            self.checkUncheckAllButton.title = "Uncheck All"
+        } else {
+            self.checkUncheckAllButton.title = "Check All"
+        }
         tableView.reloadData()
     }
     
