@@ -23,31 +23,19 @@ class PantryTableViewController: UITableViewController {
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         setUpPantry()
-        //pantryIngredients = ingredients.filter("category = 'pantry'")
-
-        // Uncomment the following line to preserve selection between presentations
-        //self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return 10
     }
 
@@ -57,9 +45,6 @@ class PantryTableViewController: UITableViewController {
         let row = indexPath.row
         let pIngredient = pantryIngredients[row]
         cell.ingredient = pIngredient
-        //let pantry = Pantry.sharedInstance
-        //pantry.listOfIngredients = ""
-        //setUpCell(cell, currentRow: row)
         
         let realm = Realm()
         
@@ -77,7 +62,6 @@ class PantryTableViewController: UITableViewController {
         let realm = Realm()
         currentPantryIngredient = Ingredient()
         currentPantryIngredient!.name = (cell.textLabel?.text)!
-        //let pantry = Pantry.sharedInstance
         
         if cell.accessoryType == UITableViewCellAccessoryType.None {
             currentPantryIngredient!.addedDate = NSDate()
@@ -100,8 +84,6 @@ class PantryTableViewController: UITableViewController {
         }
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         tableView.reloadData()
-        //println(pantry.listOfIngredients)
-        
     }
     
     func getNumberOfIngredients() -> Int {
@@ -111,9 +93,7 @@ class PantryTableViewController: UITableViewController {
     
     func setUpPantry() {
         pantryIngredients = []
-        
         for (var i = 0; i < 10; i++) {
-            
             switch i {
             case 0:
                 currentPantryIngredient = Ingredient()
