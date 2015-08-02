@@ -21,7 +21,8 @@ class PantryTableViewController: UITableViewController {
     @IBAction func checkOrUncheckAll(sender: UIBarButtonItem) {
         let realm = Realm()
         ingredientsInPantry = realm.objects(Ingredient).filter("category = 'pantry'")
-        if ingredientsInPantry.count == 10 {
+        ingredients = realm.objects(Ingredient)
+        if ingredientsInPantry.count >= 10 {
             realm.write() {
                 realm.delete(self.ingredientsInPantry)
             }
@@ -32,8 +33,8 @@ class PantryTableViewController: UITableViewController {
             for potentialIngredient in pantryIngredients {
                 var matchesExistingIngredient = false
                 
-                for existingIngredient in ingredientsInPantry {
-                    if potentialIngredient.name == existingIngredient.name {
+                for existingIngredient in ingredients {
+                    if potentialIngredient.name.caseInsensitiveCompare(existingIngredient.name) == NSComparisonResult(rawValue: 0) {
                         matchesExistingIngredient = true
                         break
                     }
@@ -61,7 +62,7 @@ class PantryTableViewController: UITableViewController {
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         setUpPantry()
         
-        if realm.objects(Ingredient).filter("category = 'pantry'").count == 10 {
+        if realm.objects(Ingredient).filter("category = 'pantry'").count >= 10 {
             self.checkUncheckAllButton.title = "Uncheck All"
         } else {
             self.checkUncheckAllButton.title = "Check All"
@@ -131,7 +132,7 @@ class PantryTableViewController: UITableViewController {
             }
         }
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
-        if ingredients.filter("category = 'pantry'").count == 10 {
+        if ingredients.filter("category = 'pantry'").count >= 10 {
             self.checkUncheckAllButton.title = "Uncheck All"
         } else {
             self.checkUncheckAllButton.title = "Check All"

@@ -43,7 +43,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         self.tableView.dataSource = self
         
         if realm.objects(Ingredient).filter("category = 'user-specific'").count > 0 {
-            let alertController = UIAlertController(title: "Clear All Ingredients?", message: "This can't be undone!", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Clear all ingredients in this list?", message: "This can't be undone!", preferredStyle: UIAlertControllerStyle.Alert)
             
             alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
                 
@@ -74,7 +74,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
         let realm = Realm()
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         pantryIngredients = realm.objects(Ingredient).filter("category = 'pantry'")
-        userOnlyIngredients = realm.objects(Ingredient).filter("category = 'user-specific'")
+        userOnlyIngredients = realm.objects(Ingredient).filter("category = 'user-specific'").sorted("addedDate", ascending: true)
         
         // Do any additional setup after loading the view.
     }
@@ -176,7 +176,7 @@ extension IngredientsListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let ingredient = ingredients[indexPath.row] as Object
+            let ingredient = userOnlyIngredients[indexPath.row] as Object
             
             let realm = Realm()
             
