@@ -29,6 +29,7 @@
 		62A07D6E1B1F7FB9001F6916 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; };
 		62A07D6F1B1F7FB9001F6916 /* Bond.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B46B1C741B6C86B40003A14B /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46B1C731B6C86B30003A14B /* ShareData.swift */; };
+		B46FA4381B6FE4B400517E6D /* RecipeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46FA4371B6FE4B400517E6D /* RecipeEntry.swift */; };
 		B47641A81B6A148A000D5FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47641901B6A148A000D5FD8 /* AppDelegate.swift */; };
 		B47641A91B6A148A000D5FD8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B47641911B6A148A000D5FD8 /* LaunchScreen.xib */; };
 		B47641AA1B6A148A000D5FD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B47641931B6A148A000D5FD8 /* Main.storyboard */; };
@@ -167,6 +168,7 @@
 		9C981D2E8AF9776C1453BD80 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ABCA6EA806F0B4FC2431FD87 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B46B1C731B6C86B30003A14B /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
+		B46FA4371B6FE4B400517E6D /* RecipeEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeEntry.swift; sourceTree = "<group>"; };
 		B47641901B6A148A000D5FD8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B47641921B6A148A000D5FD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B47641941B6A148A000D5FD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -276,7 +278,6 @@
 		62C8C1D71B06BD6500DC3EA7 = {
 			isa = PBXGroup;
 			children = (
-				B477DB0C1B6D40A5009972EA /* Constants */,
 				B47641B91B6A1513000D5FD8 /* Default-568h@2x.png */,
 				B476418F1B6A148A000D5FD8 /* ChewChew */,
 				B48E56061B62FC2C00B81443 /* SwiftyJSON.swift */,
@@ -295,9 +296,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B46FA4361B6FE49D00517E6D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B46FA4371B6FE4B400517E6D /* RecipeEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B476418F1B6A148A000D5FD8 /* ChewChew */ = {
 			isa = PBXGroup;
 			children = (
+				B46FA4361B6FE49D00517E6D /* Models */,
+				B477DB0C1B6D40A5009972EA /* Constants */,
 				B47641951B6A148A000D5FD8 /* Entities */,
 				B47641A41B6A148A000D5FD8 /* Views */,
 				B476419E1B6A148A000D5FD8 /* View Controllers */,
@@ -361,8 +372,7 @@
 				B477DB131B6D40E4009972EA /* ViewConstants.swift */,
 				B4AB3D9F1B6E81B90089151E /* PantryConstants.swift */,
 			);
-			name = Constants;
-			path = ChewChew/Constants;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		EFBB17813CE53CC7D66FDB57 /* Pods */ = {
@@ -586,6 +596,7 @@
 				B47641AB1B6A148A000D5FD8 /* Ingredient.swift in Sources */,
 				B47641AC1B6A148A000D5FD8 /* Recipe.swift in Sources */,
 				B48E56071B62FC2C00B81443 /* SwiftyJSON.swift in Sources */,
+				B46FA4381B6FE4B400517E6D /* RecipeEntry.swift in Sources */,
 				B47641AD1B6A148A000D5FD8 /* ErrorHandling.swift in Sources */,
 				B47641B81B6A148A000D5FD8 /* RecipeTableViewCell.swift in Sources */,
 				B46B1C741B6C86B40003A14B /* ShareData.swift in Sources */,
@@ -739,7 +750,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ChewChew;
-				PROVISIONING_PROFILE = "07a218e3-61c8-4948-add2-d5ee5fb6f66f";
+				PROVISIONING_PROFILE = "87b22c72-a5e3-471d-bd69-d2bce11a8182";
 				SWIFT_OBJC_BRIDGING_HEADER = "./ChewChew/TemplateProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -764,7 +775,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ChewChew;
-				PROVISIONING_PROFILE = "07a218e3-61c8-4948-add2-d5ee5fb6f66f";
+				PROVISIONING_PROFILE = "87b22c72-a5e3-471d-bd69-d2bce11a8182";
 				SWIFT_OBJC_BRIDGING_HEADER = "./ChewChew/TemplateProject-Bridging-Header.h";
 			};
 			name = Release;
