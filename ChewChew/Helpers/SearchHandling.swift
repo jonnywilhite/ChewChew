@@ -21,10 +21,10 @@ struct SearchHandling {
             
             if let json: AnyObject = response.responseObject {
                 
-                if response.responseObject!.count == 5 {
+                if response.responseObject!.count > 0 {
                     
                     sender.alertControllerDisplayed = false
-                    for (var i = 0; i < 5; i++) {
+                    for (var i = 0; i < response.responseObject!.count; i++) {
                         sender.currentRecipe = Recipe()
                         sender.currentRecipe!.title = json[i]["title"] as! String
                         let usedCount = json[i]["usedIngredientCount"] as! Int
@@ -60,7 +60,7 @@ struct SearchHandling {
             }
         }
         
-        while sender.recipes.count != 5 && sender.alertControllerDisplayed == false {
+        while sender.recipes.count == 0 && sender.alertControllerDisplayed == false {
             continue
         }
         

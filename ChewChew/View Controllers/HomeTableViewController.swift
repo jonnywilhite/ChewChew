@@ -102,7 +102,7 @@ class HomeTableViewController: UITableViewController {
                 }
             }
             var request = HTTPTask()
-            var params = ["ingredients": ingredientsAsAString, "number": "5"]
+            var params = ["ingredients": ingredientsAsAString, "number": "15"]
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
