@@ -19,6 +19,8 @@ class HomeTableViewController: UITableViewController {
     var currentEntry : RecipeEntry?
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
+    
+    var backgroundTaskIsDone : Bool = false
 
     @IBOutlet weak var detailLabel : UILabel!
     
@@ -33,6 +35,8 @@ class HomeTableViewController: UITableViewController {
         
         tableView.reloadData()
         recipes = []
+        recipeEntries = []
+        backgroundTaskIsDone = false
         alertControllerDisplayed = nil
     }
     
@@ -108,10 +112,8 @@ class HomeTableViewController: UITableViewController {
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
-            while alertControllerDisplayed == nil {
-                continue
-            }
-            if (self.alertControllerDisplayed! == false) {
+            
+            if backgroundTaskIsDone {
                 self.performSegueWithIdentifier("SearchRecipes", sender: self)
             }
         }

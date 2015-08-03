@@ -62,15 +62,12 @@ struct SearchHandling {
                 }
                 
                 println(sender.recipes.count)
+                sender.backgroundTaskIsDone = true
+                sender.performSegueWithIdentifier("SearchRecipes", sender: sender)
                 
             } else {
                 println("Unexpected error with the JSON object")
             }
         }
-        
-        while sender.recipes.count == 0 && sender.alertControllerDisplayed == false {
-            continue
-        }
-        
     }
 }

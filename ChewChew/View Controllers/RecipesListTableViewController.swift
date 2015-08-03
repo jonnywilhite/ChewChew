@@ -12,23 +12,29 @@ import SwiftHTTP
 import RealmSwift
 import ConvenienceKit
 
-class RecipesListTableViewController: UITableViewController {
+class RecipesListTableViewController: UITableViewController, TimelineComponentTarget {
+    
+    let defaultRange = 0...4
+    let additionalRangeSize = 5
+    var timelineComponent : TimelineComponent<Recipe, RecipesListTableViewController>!
     
     var recipes: [Recipe] = []
+    var recipesToLoad : [Recipe] = []
     var recipeEntries : [RecipeEntry] = []
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        timelineComponent = TimelineComponent(target: self)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        for recipe in self.recipes {
-            let url = NSURL(string: recipe.imageURL)
-            let data = NSData(contentsOfURL: url!)
-        }
+        timelineComponent.loadInitialIfRequired()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,14 +48,14 @@ class RecipesListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeEntries.count
+        return timelineComponent.content.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeTableViewCell
         
         let row = indexPath.row
-        let recipe = recipes[row]
+        let recipe = timelineComponent.content[row]
         
         cell.recipe = recipe
         
@@ -74,6 +80,22 @@ class RecipesListTableViewController: UITableViewController {
         }
         let url = NSURL(string: urlString)
         UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        timelineComponent.targetWillDisplayEntry(indexPath.row)
+    }
+    
+    func loadInRange(range: Range<Int>, completionBlock: ([Recipe]?) -> Void) {
+        // 1
+        recipesToLoad = []
+        for index in range {
+            if index < recipes.count {
+                recipesToLoad.append(recipes[index])
+            }
+        }
+        completionBlock(recipesToLoad)
     }
 }
 
