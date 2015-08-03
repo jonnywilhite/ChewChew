@@ -14,14 +14,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Ingredients List" id="cPE-pB-qYu">
+                            <tableViewSection headerTitle="Pantry" footerTitle="A list of common household ingredients that can be added to your list with a single tap" id="cPE-pB-qYu">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FirstCell" textLabel="AD7-p8-2Q5" detailTextLabel="b8y-sZ-Ach" style="IBUITableViewCellStyleValue1" id="Oyf-Hu-Mcu" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oyf-Hu-Mcu" id="ao1-x5-3Gv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AD7-p8-2Q5">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Items Checked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AD7-p8-2Q5">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,20 +35,17 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="7BU-U6-VyA" kind="show" identifier="ShowIngredients" id="NMt-0M-LD3"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Pantry" footerTitle="A list of common household ingredients that can be added to your list with a single tap" id="zbf-7a-Q3w">
+                            <tableViewSection headerTitle="Other Ingredients" footerTitle="Manually enter in any other ingredients you have available to you" id="zbf-7a-Q3w">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PantryCell" textLabel="a4E-J4-Y8E" detailTextLabel="1aV-k8-F8Y" style="IBUITableViewCellStyleValue1" id="aIV-VB-KUS" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aIV-VB-KUS" id="vWN-9y-xQl">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Items Checked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4E-J4-Y8E">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4E-J4-Y8E">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -96,6 +93,7 @@
                         <outlet property="detailLabel" destination="b8y-sZ-Ach" id="oMd-y3-5H3"/>
                         <segue destination="Qn6-Ab-n01" kind="show" identifier="SearchRecipes" id="D6G-5v-mcl"/>
                         <segue destination="08q-pa-yvm" kind="show" identifier="ShowPantry" id="U1Y-4v-U9g"/>
+                        <segue destination="7BU-U6-VyA" kind="show" identifier="ShowIngredients" id="4bc-bj-5D8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2So-Uc-Qrf" userLabel="First Responder" sceneMemberID="firstResponder"/>

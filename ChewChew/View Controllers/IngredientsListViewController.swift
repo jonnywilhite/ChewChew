@@ -221,11 +221,13 @@ extension IngredientsListViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         textField.placeholder = "Add an Ingredient..."
         let realm = Realm()
+        ingredients = realm.objects(Ingredient)
+        userOnlyIngredients = ingredients.filter("category = 'user-specific'")
         if !deleteButtonTappedWhileEditing! {
             
             var endingText = textField.text
             
-            for item in realm.objects(Ingredient) {
+            for item in userOnlyIngredients {
                 if endingText.caseInsensitiveCompare(item.name) == NSComparisonResult(rawValue: 0) {
                     textField.text = beginningText
                     endingText = textField.text
@@ -246,14 +248,35 @@ extension IngredientsListViewController: UITextFieldDelegate {
                 currentIngredient = Ingredient()
                 currentIngredient!.name = endingText
                 currentIngredient!.addedDate = NSDate()
+                
                 for name in pantry.listOfAllIngredients {
                     if currentIngredient!.name.caseInsensitiveCompare(name) == NSComparisonResult(rawValue: 0) {
                         currentIngredient!.category = "pantry"
-                        break
+                        var isAlreadyInIngredients = false
+                        for addedIngredient in ingredients {
+                            if currentIngredient!.name.caseInsensitiveCompare(addedIngredient.name) == NSComparisonResult(rawValue: 0) {
+                                isAlreadyInIngredients = true
+                                break
+                            }
+                        }
+                        if isAlreadyInIngredients {
+                            let alertController = UIAlertController(title: "Item is already checked in the pantry!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                            alertController.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+                            endingTextIsEmpty = true
+                            textField.text = beginningText
+                            presentViewController(alertController, animated: true, completion: nil)
+                        } else {
+                            let alertController = UIAlertController(title: "Item has been checked in the pantry!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                            
+                            alertController.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+                            presentViewController(alertController, animated: true, completion: nil)
+                            break
+                        }
                     } else {
                         currentIngredient!.category = "user-specific"
                     }
                 }
+                
                 if !endingTextIsEmpty! {
                     realm.write() {
                         realm.add(self.currentIngredient!)
@@ -262,14 +285,56 @@ extension IngredientsListViewController: UITextFieldDelegate {
                     currentIngredient = nil
                 }
             } else {
+                
                 currentIngredient = shareData.selectedIngredient[0] as Ingredient
                 if endingTextIsEmpty! {
                     realm.write() {
                         realm.delete(self.currentIngredient!)
                     }
                 } else {
+                    
+                    for name in pantry.listOfAllIngredients {
+                        var isInPantry = false
+                        if endingText.caseInsensitiveCompare(name) == NSComparisonResult(rawValue: 0) {
+                            
+                            isInPantry = true
+                            realm.write() {
+                                self.currentIngredient!.category = "pantry"
+                            }
+                            var isAlreadyInIngredients = false
+                            for addedIngredient in ingredients {
+                                
+                                if endingText.caseInsensitiveCompare(addedIngredient.name) == NSComparisonResult(rawValue: 0) {
+                                    isAlreadyInIngredients = true
+                                    break
+                                }
+                            }
+                            
+                            if isAlreadyInIngredients {
+                                
+                                let alertController = UIAlertController(title: "Item is already checked in the pantry!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                                alertController.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+                                endingTextIsEmpty = true
+                                textField.text = beginningText
+                                presentViewController(alertController, animated: true, completion: nil)
+                            } else {
+                                
+                                let alertController = UIAlertController(title: "Item has been checked in the pantry!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                                
+                                alertController.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+                                presentViewController(alertController, animated: true, completion: nil)
+                                break
+                            }
+                        }
+                        realm.write() {
+                            self.currentIngredient!.category = "user-specific"
+                        }
+                    }
                     realm.write() {
                         self.currentIngredient!.name = textField.text
+                        if self.currentIngredient!.category == "pantry" {
+                            self.currentIngredient!.category = "pantry"
+                        }
                     }
                 }
             }

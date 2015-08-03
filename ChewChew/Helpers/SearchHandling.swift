@@ -45,7 +45,6 @@ struct SearchHandling {
                         
                     }
                 } else {
-                    println("Didn't get enough results")
                     sender.alertControllerDisplayed = true
                     let alertController = UIAlertController(title: "Error", message:
                         "Could not find any results", preferredStyle: UIAlertControllerStyle.Alert)

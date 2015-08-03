@@ -47,6 +47,17 @@ class HomeTableViewController: UITableViewController {
         
         if indexPath.section == 0 {
             
+            let y = PantryTableViewController.getNumberOfIngredients(PantryTableViewController())()
+            if y == 1 {
+                cell.textLabel?.text = "\(y) Item Checked"
+            } else {
+                cell.textLabel?.text = "\(y) Items Checked"
+            }
+            cell.detailTextLabel?.text = "View Pantry"
+            cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
+            
+        } else if (indexPath.section == 1) {
+            
             let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
             if x == 1 {
                 cell.textLabel?.text = "\(x) Item"
@@ -56,16 +67,6 @@ class HomeTableViewController: UITableViewController {
             cell.detailTextLabel?.text = "View Full List"
             cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
             
-        } else if (indexPath.section == 1) {
-            cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
-            
-            let y = PantryTableViewController.getNumberOfIngredients(PantryTableViewController())()
-            if y == 1 {
-                cell.textLabel?.text = "\(y) Item Checked"
-            } else {
-                cell.textLabel?.text = "\(y) Items Checked"
-            }
-            cell.detailTextLabel?.text = "View Pantry"
             
         } else /*if indexPath.section == 2*/ {
             cell.textLabel?.text = "Search Recipes"
@@ -85,9 +86,9 @@ class HomeTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
-            self.performSegueWithIdentifier("ShowIngredients", sender: self)
-        } else if (indexPath.section == 1) {
             self.performSegueWithIdentifier("ShowPantry", sender: self)
+        } else if (indexPath.section == 1) {
+            self.performSegueWithIdentifier("ShowIngredients", sender: self)
             
         } else if (indexPath.section == 2) {
             let realm = Realm()
@@ -100,12 +101,9 @@ class HomeTableViewController: UITableViewController {
                     ingredientsAsAString += ","
                 }
             }
-            
             var request = HTTPTask()
             var params = ["ingredients": ingredientsAsAString, "number": "5"]
-            
             let searchHandler = SearchHandling()
-            
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
             while alertControllerDisplayed == nil {
