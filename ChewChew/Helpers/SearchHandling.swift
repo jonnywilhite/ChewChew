@@ -26,9 +26,17 @@ struct SearchHandling {
                     sender.alertControllerDisplayed = false
                     for (var i = 0; i < response.responseObject!.count; i++) {
                         sender.currentRecipe = Recipe()
+                        sender.currentEntry = RecipeEntry()
+                        
                         sender.currentRecipe!.title = json[i]["title"] as! String
                         let usedCount = json[i]["usedIngredientCount"] as! Int
                         let missedCount = json[i]["missedIngredientCount"] as! Int
+                        
+                        if missedCount > 3 {
+                            sender.currentRecipe = nil
+                            sender.currentEntry = nil
+                            continue
+                        }
                         
                         if missedCount == 0 {
                             sender.currentRecipe!.recipeDescription = "Uses \(usedCount) of your ingredients, and you don't need any more for this recipe!"
@@ -40,9 +48,9 @@ struct SearchHandling {
                         
                         sender.currentRecipe!.imageURL = json[i]["image"] as! String
                         sender.currentRecipe!.id = json[i]["id"] as! Int
-                        
+                        sender.currentEntry!.recipe = sender.currentRecipe!
                         sender.recipes.append(sender.currentRecipe!)
-                        
+                        sender.recipeEntries.append(sender.currentEntry!)
                     }
                 } else {
                     sender.alertControllerDisplayed = true

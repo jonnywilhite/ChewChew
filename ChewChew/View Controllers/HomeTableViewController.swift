@@ -15,6 +15,8 @@ class HomeTableViewController: UITableViewController {
     
     var alertControllerDisplayed : Bool?
     var recipes: [Recipe] = []
+    var recipeEntries : [RecipeEntry] = []
+    var currentEntry : RecipeEntry?
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
 
@@ -102,7 +104,7 @@ class HomeTableViewController: UITableViewController {
                 }
             }
             var request = HTTPTask()
-            var params = ["ingredients": ingredientsAsAString, "number": "15"]
+            var params = ["ingredients": ingredientsAsAString, "number": "50"]
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
@@ -121,6 +123,7 @@ class HomeTableViewController: UITableViewController {
             let destVC : RecipesListTableViewController = segue.destinationViewController as! RecipesListTableViewController
             
             destVC.recipes = self.recipes
+            destVC.recipeEntries = self.recipeEntries
         }
     }
 }

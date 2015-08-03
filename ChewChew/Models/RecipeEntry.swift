@@ -13,8 +13,9 @@ import ConvenienceKit
 
 class RecipeEntry : NSObject {
     
+    var recipe : Recipe!
     var image : Dynamic<UIImage?> = Dynamic(nil)
-    
+    var photoDownloadTask : UIBackgroundTaskIdentifier?
     static var imageCache : NSCacheSwift<String, UIImage>!
     
     override class func initialize() {
@@ -25,5 +26,32 @@ class RecipeEntry : NSObject {
             RecipeEntry.imageCache = NSCacheSwift<String, UIImage>()
         }
     }
+    /*
+    func downloadImage() {
+        image.value = RecipeEntry.imageCache[self.recipe.imageURL]
+        
+        if (image.value == nil) {
+            
+            //Start download (in background this time!!)
+            UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
+                
+            }
+            imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+                if let error = error {
+                    ErrorHandling.defaultErrorHandler(error)
+                }
+                
+                if let data = data {
+                    let image = UIImage(data: data, scale:1.0)!
+                    
+                    //Download complete, update image
+                    self.image.value = image
+                    
+                    //Add image to cache... dictionaryName[key] = value
+                    Post.imageCache[self.imageFile!.name] = image
+                }
+            }
+        }
+    }*/
     
 }

@@ -10,15 +10,25 @@ import UIKit
 import Foundation
 import SwiftHTTP
 import RealmSwift
+import ConvenienceKit
 
 class RecipesListTableViewController: UITableViewController {
     
     var recipes: [Recipe] = []
+    var recipeEntries : [RecipeEntry] = []
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        for recipe in self.recipes {
+            let url = NSURL(string: recipe.imageURL)
+            let data = NSData(contentsOfURL: url!)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +42,7 @@ class RecipesListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        return recipeEntries.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
