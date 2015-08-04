@@ -10,8 +10,8 @@ import Foundation
 import RealmSwift
 
 class Recipe : NSObject {
-    dynamic var title : String = ""
-    dynamic var recipeDescription : String = ""
-    dynamic var imageURL : String = ""
-    dynamic var id : Int = 0
+    var title : String = ""
+    var recipeDescription : String = ""
+    var imageURL : String = ""
+    var id : Int = 0
 }
