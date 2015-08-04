@@ -31,7 +31,7 @@ struct SearchHandling {
                         sender.currentRecipe = Recipe()
                         sender.currentEntry = RecipeEntry()
                         
-                        sender.currentRecipe!.title = json[i]["title"] as! String
+                        sender.currentRecipe!.title.value = json[i]["title"] as! String
                         let usedCount = json[i]["usedIngredientCount"] as! Int
                         let missedCount = json[i]["missedIngredientCount"] as! Int
                         
@@ -42,14 +42,14 @@ struct SearchHandling {
                         }
                         
                         if missedCount == 0 {
-                            sender.currentRecipe!.recipeDescription = "Uses \(usedCount) of your ingredients, and you don't need any more for this recipe!"
+                            sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients, and you don't need any more for this recipe!"
                         } else if missedCount == 1 {
-                            sender.currentRecipe!.recipeDescription = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredient"
+                            sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredient"
                         } else {
-                            sender.currentRecipe!.recipeDescription = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredients"
+                            sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredients"
                         }
                         
-                        sender.currentRecipe!.imageURL = json[i]["image"] as! String
+                        sender.currentRecipe!.imageURL.value = json[i]["image"] as! String
                         sender.currentRecipe!.id = json[i]["id"] as! Int
                         sender.currentEntry!.recipe = sender.currentRecipe!
                         sender.recipes.append(sender.currentRecipe!)

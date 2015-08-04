@@ -8,10 +8,11 @@
 
 import Foundation
 import RealmSwift
+import Bond
 
 class Recipe : NSObject {
-    var title : String = ""
-    var recipeDescription : String = ""
-    var imageURL : String = ""
+    var title : Dynamic<String> = Dynamic("")
+    var recipeDescription : Dynamic<String> = Dynamic("")
+    var imageURL : Dynamic<String> = Dynamic("")
     var id : Int = 0
 }

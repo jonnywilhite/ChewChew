@@ -69,7 +69,7 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         var urlString : String = "https://spoonacular.com/recipe/"
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! RecipeTableViewCell
         
-        var test = cell.recipe?.title
+        var test = cell.recipe?.title.value
         if let x = test {
             test = test!.replaceAll(" ", with: "-")
             urlString += test!
