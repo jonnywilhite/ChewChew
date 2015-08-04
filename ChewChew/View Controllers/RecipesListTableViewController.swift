@@ -11,6 +11,7 @@ import Foundation
 import SwiftHTTP
 import RealmSwift
 import ConvenienceKit
+import Bond
 
 class RecipesListTableViewController: UITableViewController, TimelineComponentTarget {
     
@@ -18,7 +19,7 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     let additionalRangeSize = 5
     var timelineComponent : TimelineComponent<Recipe, RecipesListTableViewController>!
     
-    var recipes: [Recipe] = []
+    var recipes : Dynamic<[Recipe]> = Dynamic([])
     var recipesToLoad : [Recipe] = []
     var recipeEntries : [RecipeEntry] = []
     var currentRecipe : Recipe?
@@ -30,6 +31,8 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         tableView.delegate = self
         
         timelineComponent = TimelineComponent(target: self)
+        let shareData = ShareData.sharedInstance
+        shareData.recipes ->> recipes
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -91,8 +94,8 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         // 1
         recipesToLoad = []
         for index in range {
-            if index < recipes.count {
-                recipesToLoad.append(recipes[index])
+            if index < recipes.value.count {
+                recipesToLoad.append((recipes.value)[index])
             }
         }
         completionBlock(recipesToLoad)

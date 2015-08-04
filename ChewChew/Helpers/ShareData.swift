@@ -8,7 +8,7 @@
 
 import Foundation
 import RealmSwift
-
+import Bond
 
 class ShareData {
     class var sharedInstance: ShareData {
@@ -26,5 +26,5 @@ class ShareData {
     
     var didAddNewIngredient : Bool!
     var selectedIngredient: Results<Ingredient>!
-    
+    var recipes: Dynamic<[Recipe]> = Dynamic([])
 }

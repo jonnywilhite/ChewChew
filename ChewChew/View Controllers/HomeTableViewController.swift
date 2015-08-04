@@ -112,10 +112,7 @@ class HomeTableViewController: UITableViewController {
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
-            
-            if backgroundTaskIsDone {
-                self.performSegueWithIdentifier("SearchRecipes", sender: self)
-            }
+            self.performSegueWithIdentifier("SearchRecipes", sender: self)
         }
     }
     
@@ -124,7 +121,7 @@ class HomeTableViewController: UITableViewController {
             
             let destVC : RecipesListTableViewController = segue.destinationViewController as! RecipesListTableViewController
             
-            destVC.recipes = self.recipes
+            //destVC.recipes = self.recipes
             destVC.recipeEntries = self.recipeEntries
         }
     }

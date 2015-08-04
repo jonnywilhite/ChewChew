@@ -14,6 +14,9 @@ struct SearchHandling {
     
     func makeGETRequest(request: HTTPTask, params: [String: String], sender: HomeTableViewController) -> Void {
         
+        let shareData = ShareData.sharedInstance
+        shareData.recipes.value = []
+        
         request.requestSerializer.headers["X-Mashape-Key"] = "FJawMe8OpmmshpTp64RqlIjIntsjp1R6F72jsnQ66oS3ntZREx"
         request.requestSerializer.headers["Accept"] = "application/json"
         request.responseSerializer = JSONResponseSerializer()
@@ -51,6 +54,7 @@ struct SearchHandling {
                         sender.currentEntry!.recipe = sender.currentRecipe!
                         sender.recipes.append(sender.currentRecipe!)
                         sender.recipeEntries.append(sender.currentEntry!)
+                        (shareData.recipes.value).append(sender.currentRecipe!)
                     }
                 } else {
                     sender.alertControllerDisplayed = true
@@ -63,7 +67,7 @@ struct SearchHandling {
                 
                 println(sender.recipes.count)
                 sender.backgroundTaskIsDone = true
-                sender.performSegueWithIdentifier("SearchRecipes", sender: sender)
+                //sender.performSegueWithIdentifier("SearchRecipes", sender: sender)
                 
             } else {
                 println("Unexpected error with the JSON object")
