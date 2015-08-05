@@ -8,12 +8,13 @@
 
 import UIKit
 import Foundation
-import SwiftHTTP
-import RealmSwift
 import ConvenienceKit
 import Bond
+import Mixpanel
 
 class RecipesListTableViewController: UITableViewController, TimelineComponentTarget {
+    
+    var mixpanel : Mixpanel!
     
     var tableViewDataSourceBond: UITableViewDataSourceBond<RecipeTableViewCell>!
     
@@ -21,19 +22,13 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     let additionalRangeSize = 5
     var timelineComponent : TimelineComponent<Recipe, RecipesListTableViewController>!
     
-    var recipes : DynamicArray<Recipe> = DynamicArray([]) {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var recipes : DynamicArray<Recipe> = DynamicArray([])
     var recipesToLoad : [Recipe] = []
-    var recipeEntries : [RecipeEntry] = []
     var currentRecipe : Recipe?
-    var ingredients : Results<Ingredient>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mixpanel = Mixpanel.sharedInstance()
         tableViewDataSourceBond = UITableViewDataSourceBond(tableView: self.tableView)
         tableView.delegate = self
         
@@ -43,6 +38,7 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         
         recipes.map { [unowned self] (recipe: Recipe) -> RecipeTableViewCell in
             let cell = self.tableView.dequeueReusableCellWithIdentifier("RecipeCell") as! RecipeTableViewCell
+            cell.recipe = recipe
             recipe.title ->> cell.titleLabel
             recipe.recipeDescription ->> cell.descriptionLabel
             recipe.image ->> cell.recipeImage
@@ -65,38 +61,20 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timelineComponent.content.count
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeTableViewCell
-        
-        let row = indexPath.row
-        let recipe = timelineComponent.content[row]
-        
-        cell.recipe = recipe
-        
-        return cell
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        mixpanel.track("Tapped On Recipe Entry")
+        
         var urlString : String = "https://spoonacular.com/recipe/"
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! RecipeTableViewCell
         
-        var test = cell.recipe?.title.value
+        var test = cell.titleLabel.text
         if let x = test {
             test = test!.replaceAll(" ", with: "-")
             urlString += test!
         }
         urlString += "-"
         var stringTestTwo : String
-        let testTwo = cell.recipe?.id
+        let testTwo = cell.recipe?.id.value
         if let y = testTwo {
             stringTestTwo = String(testTwo!)
             urlString += stringTestTwo
@@ -111,7 +89,6 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     }
     
     func loadInRange(range: Range<Int>, completionBlock: ([Recipe]?) -> Void) {
-        // 1
         recipesToLoad = []
         for index in range {
             if index < recipes.value.count {
@@ -120,6 +97,28 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         }
         completionBlock(recipesToLoad)
     }
+    
+    /*// MARK: - Table view data source
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return timelineComponent.content.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    
+    let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeTableViewCell
+    
+    let row = indexPath.row
+    let recipe = timelineComponent.content[row]
+    
+    cell.recipe = recipe
+    
+    return cell
+    }*/
 }
 
 extension String {

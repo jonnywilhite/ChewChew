@@ -14,30 +14,12 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     
-    var flag : Bool = false
-    
+    var id : Int!
     
     var recipe : Recipe? {
         didSet {
-            if let recipe = recipe, titleLabel = titleLabel, descriptionLabel = descriptionLabel, recipeImage = recipeImage {
-                //self.titleLabel.text = recipe.title.value
-                //self.descriptionLabel.text = recipe.recipeDescription.value
-                
-                if recipe.imageURL.value.rangeOfString(".jpg") != nil {
-                    
-                    if let url = NSURL(string: recipe.imageURL.value) {
-                        if let data = NSData(contentsOfURL: url) {
-                            self.recipeImage.image = UIImage(data: data)
-                        }
-                    }
-                } else {
-                    flag = true
-                    if let url = NSURL(string: "http://i.imgur.com/5ELXQWS.png") {
-                        if let data = NSData(contentsOfURL: url) {
-                            self.recipeImage.image = UIImage(data: data)
-                        }
-                    }
-                }
+            if let recipe = recipe {
+                self.id = recipe.id.value
             }
         }
     }

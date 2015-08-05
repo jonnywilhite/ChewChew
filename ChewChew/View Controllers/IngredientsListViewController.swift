@@ -10,10 +10,13 @@ import UIKit
 import RealmSwift
 import Foundation
 import ConvenienceKit
+import Mixpanel
 
 class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Variables/Outlets/Actions
+    
+    var mixpanel : Mixpanel!
     
     var tap: UITapGestureRecognizer!
     var selectedIngredient : Results<Ingredient>!
@@ -51,6 +54,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
                 realm.write() {
                     realm.delete(self.userOnlyIngredients)
                 }
+                self.mixpanel.track("Deleted Ingredient", properties: ["Style" : "ClearAllButton"])
                 self.tableView.reloadData()
             }))
             
@@ -63,6 +67,7 @@ class IngredientsListViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Class fxns
     override func viewDidLoad() {
+        mixpanel = Mixpanel.sharedInstance()
         buttonSetUp(clearButton)
         super.viewDidLoad()
         
@@ -183,6 +188,7 @@ extension IngredientsListViewController: UITableViewDelegate {
             realm.write() {
                 realm.delete(ingredient)
             }
+            mixpanel.track("Deleted Ingredient", properties: ["Style" : "SwipeToDelete"])
             if isEditingTextField! {
                 deleteButtonTappedWhileEditing = true
             } else {
@@ -281,6 +287,7 @@ extension IngredientsListViewController: UITextFieldDelegate {
                     realm.write() {
                         realm.add(self.currentIngredient!)
                     }
+                    mixpanel.track("Added Ingredient", properties: ["Style" : "IngredientsList"])
                 } else {
                     currentIngredient = nil
                 }
@@ -291,6 +298,7 @@ extension IngredientsListViewController: UITextFieldDelegate {
                     realm.write() {
                         realm.delete(self.currentIngredient!)
                     }
+                    mixpanel.track("Deleted Ingredient", properties: ["Style" : "EmptyTextField"])
                 } else {
                     
                     for name in pantry.listOfAllIngredients {

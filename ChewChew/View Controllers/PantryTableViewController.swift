@@ -8,8 +8,11 @@
 
 import UIKit
 import RealmSwift
+import Mixpanel
 
 class PantryTableViewController: UITableViewController {
+    
+    var mixpanel : Mixpanel!
     
     var ingredients : Results<Ingredient>!
     var pantryIngredients : [Ingredient] = []
@@ -26,6 +29,7 @@ class PantryTableViewController: UITableViewController {
             realm.write() {
                 realm.delete(self.ingredientsInPantry)
             }
+            mixpanel.track("Deleted Ingredient", properties: ["Style" : "UncheckAll"])
             tableView.reloadData()
             self.viewDidLoad()
             sender.title = "Check All"
@@ -44,6 +48,7 @@ class PantryTableViewController: UITableViewController {
                     realm.write() {
                         realm.add(potentialIngredient)
                     }
+                    mixpanel.track("Added Ingredient", properties: ["Style" : "CheckAll"])
                 }
             }
             tableView.reloadData()
@@ -55,7 +60,7 @@ class PantryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mixpanel = Mixpanel.sharedInstance()
         tableView.dataSource = self
         tableView.delegate = self
         let realm = Realm()
@@ -118,7 +123,7 @@ class PantryTableViewController: UITableViewController {
             realm.write() {
                 realm.add(self.currentPantryIngredient!)
             }
-            
+            mixpanel.track("Added Ingredient", properties: ["Style" : "CheckOne"])
         } else {
             for ingredient in ingredients {
                 if currentPantryIngredient!.name.caseInsensitiveCompare(ingredient.name) == NSComparisonResult(rawValue: 0) {
@@ -130,6 +135,7 @@ class PantryTableViewController: UITableViewController {
                 realm.delete(self.currentPantryIngredient!)
                 cell.accessoryType = UITableViewCellAccessoryType.None
             }
+            mixpanel.track("Deleted Ingredient", properties: ["Style" : "UncheckOne"])
         }
         ingredients = realm.objects(Ingredient).sorted("addedDate", ascending: true)
         if ingredients.filter("category = 'pantry'").count >= 10 {

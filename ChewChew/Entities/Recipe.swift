@@ -16,7 +16,7 @@ class Recipe : NSObject {
     var recipeDescription : Dynamic<String> = Dynamic("")
     var imageURL : Dynamic<String> = Dynamic("")
     var image : Dynamic<UIImage?> = Dynamic(nil)
-    var id : Int = 0
+    var id : Dynamic<Int> = Dynamic(0)
     
     static var imageCache : NSCacheSwift<String, UIImage>!
 }

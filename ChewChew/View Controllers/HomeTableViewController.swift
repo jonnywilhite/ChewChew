@@ -10,13 +10,12 @@ import UIKit
 import Foundation
 import RealmSwift
 import SwiftHTTP
+import Mixpanel
 
 class HomeTableViewController: UITableViewController {
     
-    var alertControllerDisplayed : Bool?
-    var recipes: [Recipe] = []
-    var recipeEntries : [RecipeEntry] = []
-    var currentEntry : RecipeEntry?
+    var mixpanel : Mixpanel!
+    
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
     
@@ -28,16 +27,14 @@ class HomeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mixpanel = Mixpanel.sharedInstance()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
-        recipes = []
-        recipeEntries = []
         backgroundTaskIsDone = false
-        alertControllerDisplayed = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,10 +90,12 @@ class HomeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
             self.performSegueWithIdentifier("ShowPantry", sender: self)
+            mixpanel.track("Show", properties: ["Screen" : "Pantry"])
         } else if (indexPath.section == 1) {
             self.performSegueWithIdentifier("ShowIngredients", sender: self)
-            
+            mixpanel.track("Show", properties: ["Screen" : "Other Ingredients"])
         } else if (indexPath.section == 2) {
+            mixpanel.track("Search")
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
             var ingredientsAsAString = ""
@@ -113,16 +112,6 @@ class HomeTableViewController: UITableViewController {
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
             self.performSegueWithIdentifier("SearchRecipes", sender: self)
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SearchRecipes" {
-            
-            let destVC : RecipesListTableViewController = segue.destinationViewController as! RecipesListTableViewController
-            
-            //destVC.recipes = self.recipes
-            destVC.recipeEntries = self.recipeEntries
         }
     }
 }

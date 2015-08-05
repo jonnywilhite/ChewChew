@@ -26,21 +26,19 @@ struct SearchHandling {
                 
                 if response.responseObject!.count > 0 {
                     
-                    sender.alertControllerDisplayed = false
                     for (var i = 0; i < response.responseObject!.count; i++) {
                         sender.currentRecipe = Recipe()
-                        sender.currentEntry = RecipeEntry()
                         
+                        //Set the title of the recipe
                         sender.currentRecipe!.title.value = json[i]["title"] as! String
+                        
+                        //Set the description of the recipe
                         let usedCount = json[i]["usedIngredientCount"] as! Int
                         let missedCount = json[i]["missedIngredientCount"] as! Int
-                        
                         if missedCount > 3 {
                             sender.currentRecipe = nil
-                            sender.currentEntry = nil
                             continue
                         }
-                        
                         if missedCount == 0 {
                             sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients, and you don't need any more for this recipe!"
                         } else if missedCount == 1 {
@@ -49,9 +47,11 @@ struct SearchHandling {
                             sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredients"
                         }
                         
-                        sender.currentRecipe!.imageURL.value = json[i]["image"] as! String
-                        sender.currentRecipe!.id = json[i]["id"] as! Int
+                        //Set the id of the recipe
+                        sender.currentRecipe!.id.value = json[i]["id"] as! Int
                         
+                        //Set the image of the recipe
+                        sender.currentRecipe!.imageURL.value = json[i]["image"] as! String
                         if sender.currentRecipe!.imageURL.value.rangeOfString(".jpg") != nil {
                             
                             if let url = NSURL(string: sender.currentRecipe!.imageURL.value) {
@@ -67,13 +67,10 @@ struct SearchHandling {
                             }
                         }
                         
-                        sender.currentEntry!.recipe = sender.currentRecipe!
-                        sender.recipes.append(sender.currentRecipe!)
-                        sender.recipeEntries.append(sender.currentEntry!)
+                        //Add the recipe to the list to display in RecipesListTable VC
                         (shareData.recipes.value).append(sender.currentRecipe!)
                     }
                 } else {
-                    sender.alertControllerDisplayed = true
                     let alertController = UIAlertController(title: "Error", message:
                         "No recipes found", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
@@ -81,10 +78,9 @@ struct SearchHandling {
                     sender.presentViewController(alertController, animated: true, completion: nil)
                 }
                 
-                println(sender.recipes.count)
+                println((shareData.recipes.value).count)
                 sender.backgroundTaskIsDone = true
                 NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
-                //sender.performSegueWithIdentifier("SearchRecipes", sender: sender)
                 
             } else {
                 println("Unexpected error with the JSON object")

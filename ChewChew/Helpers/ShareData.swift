@@ -26,5 +26,5 @@ class ShareData {
     
     var didAddNewIngredient : Bool!
     var selectedIngredient: Results<Ingredient>!
-    var recipes: Dynamic<[Recipe]> = Dynamic([])
+    var recipes: DynamicArray<Recipe> = DynamicArray([])
 }
