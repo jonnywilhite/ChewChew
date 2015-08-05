@@ -28,6 +28,7 @@
 		62A07D661B1F79F2001F6916 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D651B1F79F2001F6916 /* libstdc++.6.dylib */; };
 		62A07D6E1B1F7FB9001F6916 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; };
 		62A07D6F1B1F7FB9001F6916 /* Bond.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8742B7FC6C50864B05AFE591 /* Pods_ChewChew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42694DA6E9CD8BEB13E0C08A /* Pods_ChewChew.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B46B1C741B6C86B40003A14B /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46B1C731B6C86B30003A14B /* ShareData.swift */; };
 		B46FA4381B6FE4B400517E6D /* RecipeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46FA4371B6FE4B400517E6D /* RecipeEntry.swift */; };
 		B47641A81B6A148A000D5FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47641901B6A148A000D5FD8 /* AppDelegate.swift */; };
@@ -144,6 +145,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		42694DA6E9CD8BEB13E0C08A /* Pods_ChewChew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChewChew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB320507A3F9AE571D542A8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		62551B631B06BF6D000913E4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		62551B641B06BF6D000913E4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				62551B6E1B06BF6D000913E4 /* FBSDKLoginKit.framework in Frameworks */,
 				62551B701B06BF6D000913E4 /* Parse.framework in Frameworks */,
 				1A8D3A56486770F97ADDEF62 /* Pods.framework in Frameworks */,
+				8742B7FC6C50864B05AFE591 /* Pods_ChewChew.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +252,7 @@
 				62551B6A1B06BF6D000913E4 /* ParseFacebookUtilsV4.framework */,
 				62551B6B1B06BF6D000913E4 /* ParseUI.framework */,
 				ABCA6EA806F0B4FC2431FD87 /* Pods.framework */,
+				42694DA6E9CD8BEB13E0C08A /* Pods_ChewChew.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -562,7 +566,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChewChew/Pods-ChewChew-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E71DDC71B5CD906672328A23 /* Embed Pods Frameworks */ = {
@@ -577,7 +581,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChewChew/Pods-ChewChew-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -51,6 +51,22 @@ struct SearchHandling {
                         
                         sender.currentRecipe!.imageURL.value = json[i]["image"] as! String
                         sender.currentRecipe!.id = json[i]["id"] as! Int
+                        
+                        if sender.currentRecipe!.imageURL.value.rangeOfString(".jpg") != nil {
+                            
+                            if let url = NSURL(string: sender.currentRecipe!.imageURL.value) {
+                                if let data = NSData(contentsOfURL: url) {
+                                    sender.currentRecipe!.image.value = UIImage(data: data)
+                                }
+                            }
+                        } else {
+                            if let url = NSURL(string: "http://i.imgur.com/5ELXQWS.png") {
+                                if let data = NSData(contentsOfURL: url) {
+                                    sender.currentRecipe!.image.value = UIImage(data: data)
+                                }
+                            }
+                        }
+                        
                         sender.currentEntry!.recipe = sender.currentRecipe!
                         sender.recipes.append(sender.currentRecipe!)
                         sender.recipeEntries.append(sender.currentEntry!)
@@ -59,7 +75,7 @@ struct SearchHandling {
                 } else {
                     sender.alertControllerDisplayed = true
                     let alertController = UIAlertController(title: "Error", message:
-                        "Could not find any results", preferredStyle: UIAlertControllerStyle.Alert)
+                        "No recipes found", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                     
                     sender.presentViewController(alertController, animated: true, completion: nil)
@@ -67,6 +83,7 @@ struct SearchHandling {
                 
                 println(sender.recipes.count)
                 sender.backgroundTaskIsDone = true
+                NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                 //sender.performSegueWithIdentifier("SearchRecipes", sender: sender)
                 
             } else {

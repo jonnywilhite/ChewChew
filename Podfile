@@ -6,8 +6,8 @@ pod 'SwiftHTTP', '~> 0.9.4'
 pod 'RealmSwift'
 pod 'Mixpanel'
 
-#target ‘ChewChew’ do
+target 'ChewChew' do
 
+pod 'Bond', '~> 3.7'
 
-
-#end
+end

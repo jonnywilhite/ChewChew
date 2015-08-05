@@ -20,8 +20,8 @@ class RecipeTableViewCell: UITableViewCell {
     var recipe : Recipe? {
         didSet {
             if let recipe = recipe, titleLabel = titleLabel, descriptionLabel = descriptionLabel, recipeImage = recipeImage {
-                self.titleLabel.text = recipe.title.value
-                self.descriptionLabel.text = recipe.recipeDescription.value
+                //self.titleLabel.text = recipe.title.value
+                //self.descriptionLabel.text = recipe.recipeDescription.value
                 
                 if recipe.imageURL.value.rangeOfString(".jpg") != nil {
                     

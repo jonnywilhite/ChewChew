@@ -15,11 +15,17 @@ import Bond
 
 class RecipesListTableViewController: UITableViewController, TimelineComponentTarget {
     
+    var tableViewDataSourceBond: UITableViewDataSourceBond<RecipeTableViewCell>!
+    
     let defaultRange = 0...4
     let additionalRangeSize = 5
     var timelineComponent : TimelineComponent<Recipe, RecipesListTableViewController>!
     
-    var recipes : Dynamic<[Recipe]> = Dynamic([])
+    var recipes : DynamicArray<Recipe> = DynamicArray([]) {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var recipesToLoad : [Recipe] = []
     var recipeEntries : [RecipeEntry] = []
     var currentRecipe : Recipe?
@@ -27,12 +33,26 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
+        
+        tableViewDataSourceBond = UITableViewDataSourceBond(tableView: self.tableView)
         tableView.delegate = self
         
         timelineComponent = TimelineComponent(target: self)
         let shareData = ShareData.sharedInstance
         shareData.recipes ->> recipes
+        
+        recipes.map { [unowned self] (recipe: Recipe) -> RecipeTableViewCell in
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("RecipeCell") as! RecipeTableViewCell
+            recipe.title ->> cell.titleLabel
+            recipe.recipeDescription ->> cell.descriptionLabel
+            recipe.image ->> cell.recipeImage
+            return cell
+            } ->> tableViewDataSourceBond
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList", name: "load", object: nil)
+    }
+    
+    func loadList() {
+        tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
