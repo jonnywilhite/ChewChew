@@ -12,7 +12,9 @@ import ConvenienceKit
 import Bond
 import Mixpanel
 
-class RecipesListTableViewController: UITableViewController, TimelineComponentTarget {
+class RecipesListTableViewController: UITableViewController {
+    
+    var indicator : UIActivityIndicatorView!
     
     var mixpanel : Mixpanel!
     
@@ -20,7 +22,6 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     
     let defaultRange = 0...4
     let additionalRangeSize = 5
-    var timelineComponent : TimelineComponent<Recipe, RecipesListTableViewController>!
     
     var recipes : DynamicArray<Recipe> = DynamicArray([])
     var recipesToLoad : [Recipe] = []
@@ -28,32 +29,43 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorColor = UIColor.whiteColor()
         mixpanel = Mixpanel.sharedInstance()
+        indicator = UIActivityIndicatorView()
+        activityIndicator()
+        indicator.startAnimating()
+        indicator.backgroundColor = UIColor.whiteColor()
         tableViewDataSourceBond = UITableViewDataSourceBond(tableView: self.tableView)
         tableView.delegate = self
         
-        timelineComponent = TimelineComponent(target: self)
         let shareData = ShareData.sharedInstance
         shareData.recipes ->> recipes
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList", name: "load", object: nil)
         recipes.map { [unowned self] (recipe: Recipe) -> RecipeTableViewCell in
             let cell = self.tableView.dequeueReusableCellWithIdentifier("RecipeCell") as! RecipeTableViewCell
             cell.recipe = recipe
             recipe.title ->> cell.titleLabel
             recipe.recipeDescription ->> cell.descriptionLabel
             recipe.image ->> cell.recipeImage
+            if self.indicator.isAnimating() {
+                self.indicator.stopAnimating()
+                self.indicator.hidesWhenStopped = true
+                self.tableView.separatorColor = UIColor.lightGrayColor()
+            }
             return cell
             } ->> tableViewDataSourceBond
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList", name: "load", object: nil)
     }
     
     func loadList() {
-        tableView.reloadData()
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        timelineComponent.loadInitialIfRequired()
+        //timelineComponent.loadInitialIfRequired()
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,42 +95,12 @@ class RecipesListTableViewController: UITableViewController, TimelineComponentTa
         UIApplication.sharedApplication().openURL(url!)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        timelineComponent.targetWillDisplayEntry(indexPath.row)
+    func activityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        indicator.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 200)//self.view.center
+        self.view.addSubview(indicator)
     }
-    
-    func loadInRange(range: Range<Int>, completionBlock: ([Recipe]?) -> Void) {
-        recipesToLoad = []
-        for index in range {
-            if index < recipes.value.count {
-                recipesToLoad.append((recipes.value)[index])
-            }
-        }
-        completionBlock(recipesToLoad)
-    }
-    
-    /*// MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return timelineComponent.content.count
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-    
-    let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeTableViewCell
-    
-    let row = indexPath.row
-    let recipe = timelineComponent.content[row]
-    
-    cell.recipe = recipe
-    
-    return cell
-    }*/
 }
 
 extension String {

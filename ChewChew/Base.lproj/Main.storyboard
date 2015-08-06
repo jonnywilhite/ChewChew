@@ -62,14 +62,46 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle=" " id="NIB-hm-CUv">
+                            <tableViewSection footerTitle="Enable to exclude recipes that . Recommended only if you have an exhaustive list of ingredients" id="NIB-hm-CUv">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="VHi-me-erq" style="IBUITableViewCellStyleDefault" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kT9-ok-cc3" id="pc8-Rj-JXk">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VHi-me-erq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Search Results" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riV-DE-3n9">
+                                                    <rect key="frame" x="15" y="11" width="158" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ykg-dW-0XD">
+                                                    <rect key="frame" x="538" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="saveSwitchChange:" destination="v3Z-1u-EoJ" eventType="valueChanged" id="3gM-0B-fxy"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="riV-DE-3n9" secondAttribute="centerY" id="GH0-9K-OMs"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ykg-dW-0XD" secondAttribute="bottom" constant="-2" id="K6C-of-sQm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ykg-dW-0XD" secondAttribute="trailing" constant="5" id="LMx-ln-65c"/>
+                                                <constraint firstItem="ykg-dW-0XD" firstAttribute="top" secondItem="pc8-Rj-JXk" secondAttribute="topMargin" constant="-2" id="fbY-VH-taQ"/>
+                                                <constraint firstAttribute="centerY" secondItem="ykg-dW-0XD" secondAttribute="centerY" id="gHM-bS-Ux0"/>
+                                                <constraint firstItem="riV-DE-3n9" firstAttribute="leading" secondItem="pc8-Rj-JXk" secondAttribute="leadingMargin" constant="7" id="oVg-8M-uZV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="1n8-Me-AYO">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="g61-5l-hmS" style="IBUITableViewCellStyleDefault" id="kHM-gV-L3G" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kHM-gV-L3G" id="nE2-d1-eg5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g61-5l-hmS">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,6 +123,7 @@
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="detailLabel" destination="b8y-sZ-Ach" id="oMd-y3-5H3"/>
+                        <outlet property="limitSwitch" destination="ykg-dW-0XD" id="VMK-ZN-WEh"/>
                         <segue destination="Qn6-Ab-n01" kind="show" identifier="SearchRecipes" id="D6G-5v-mcl"/>
                         <segue destination="08q-pa-yvm" kind="show" identifier="ShowPantry" id="U1Y-4v-U9g"/>
                         <segue destination="7BU-U6-VyA" kind="show" identifier="ShowIngredients" id="4bc-bj-5D8"/>

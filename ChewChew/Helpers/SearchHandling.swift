@@ -14,8 +14,15 @@ struct SearchHandling {
     
     func makeGETRequest(request: HTTPTask, params: [String: String], sender: HomeTableViewController) -> Void {
         
+        var limitResults : Bool!
+        
         let shareData = ShareData.sharedInstance
         shareData.recipes.value = []
+        if sender.limitSwitch.on {
+            limitResults = true
+        } else {
+            limitResults = false
+        }
         
         request.requestSerializer.headers["X-Mashape-Key"] = "FJawMe8OpmmshpTp64RqlIjIntsjp1R6F72jsnQ66oS3ntZREx"
         request.requestSerializer.headers["Accept"] = "application/json"
@@ -35,7 +42,7 @@ struct SearchHandling {
                         //Set the description of the recipe
                         let usedCount = json[i]["usedIngredientCount"] as! Int
                         let missedCount = json[i]["missedIngredientCount"] as! Int
-                        if missedCount > 3 {
+                        if limitResults! && missedCount > 3 {
                             sender.currentRecipe = nil
                             continue
                         }
@@ -69,6 +76,9 @@ struct SearchHandling {
                         
                         //Add the recipe to the list to display in RecipesListTable VC
                         (shareData.recipes.value).append(sender.currentRecipe!)
+                        if shareData.recipes.value.count == 20 {
+                            break
+                        }
                     }
                 } else {
                     let alertController = UIAlertController(title: "Error", message:
@@ -84,6 +94,11 @@ struct SearchHandling {
                 
             } else {
                 println("Unexpected error with the JSON object")
+                let alertController = UIAlertController(title: "Error loading recipes", message:
+                    "Recipes could not be loaded at this time due to a network error", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                
+                sender.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }

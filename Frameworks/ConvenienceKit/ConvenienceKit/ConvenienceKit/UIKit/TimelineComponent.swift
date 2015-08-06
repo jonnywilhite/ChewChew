@@ -72,7 +72,7 @@ public class TimelineComponent <T: Equatable, S: TimelineComponentTarget where S
     self.target = target
     
     refreshControl = UIRefreshControl()
-    target.tableView.insertSubview(refreshControl, atIndex:0)
+    //target.tableView.insertSubview(refreshControl, atIndex:0)
     
     currentRange = target.defaultRange
     

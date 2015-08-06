@@ -16,18 +16,24 @@ class HomeTableViewController: UITableViewController {
     
     var mixpanel : Mixpanel!
     
+    @IBOutlet weak var limitSwitch: UISwitch!
+    
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
     
     var backgroundTaskIsDone : Bool = false
 
     @IBOutlet weak var detailLabel : UILabel!
+    @IBAction func saveSwitchChange(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(limitSwitch.on, forKey: "switchState")
+    }
     
     //MARK: View openings
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mixpanel = Mixpanel.sharedInstance()
+        limitSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("switchState")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,7 +77,11 @@ class HomeTableViewController: UITableViewController {
             cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
             
             
-        } else /*if indexPath.section == 2*/ {
+        } else if indexPath.section == 2 {
+            cell.textLabel?.text = "Limit Search Results"
+            cell.accessoryView = limitSwitch
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+        } else {
             cell.textLabel?.text = "Search Recipes"
             var myColor = UIColor(red: 24.0/255.0, green: 108.0/255.0, blue: 254.0/255.0, alpha: 1.0)
             cell.textLabel?.textColor = myColor
@@ -82,7 +92,11 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return indexPath
+        if indexPath.section == 2 {
+            return nil
+        } else {
+            return indexPath
+        }
     }
     
     //MARK: Navigation
@@ -95,6 +109,8 @@ class HomeTableViewController: UITableViewController {
             self.performSegueWithIdentifier("ShowIngredients", sender: self)
             mixpanel.track("Show", properties: ["Screen" : "Other Ingredients"])
         } else if (indexPath.section == 2) {
+            return
+        } else if (indexPath.section == 3) {
             mixpanel.track("Search")
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
@@ -106,8 +122,14 @@ class HomeTableViewController: UITableViewController {
                     ingredientsAsAString += ","
                 }
             }
+            var numParam : Int!
             var request = HTTPTask()
-            var params = ["ingredients": ingredientsAsAString, "number": "50"]
+            if limitSwitch.on {
+                numParam = 200
+            } else {
+                numParam = 15
+            }
+            var params = ["ingredients": ingredientsAsAString, "number": "\(numParam)"]
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
