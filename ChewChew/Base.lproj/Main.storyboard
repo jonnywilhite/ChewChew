@@ -62,7 +62,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="Enable to exclude recipes that . Recommended only if you have an exhaustive list of ingredients" id="NIB-hm-CUv">
+                            <tableViewSection footerTitle="Enable to exclude recipes that require too many additional ingredients" id="NIB-hm-CUv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -94,7 +94,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="1n8-Me-AYO">
+                            <tableViewSection headerTitle=" " id="1n8-Me-AYO">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="g61-5l-hmS" style="IBUITableViewCellStyleDefault" id="kHM-gV-L3G" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
