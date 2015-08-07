@@ -84,7 +84,7 @@ class RecipesListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         mixpanel.track("Tapped On Recipe Entry")
         
-        var urlString : String = "https://spoonacular.com/recipe/"
+        var urlString : String = "http://spoonacular.com/recipe/"
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! RecipeTableViewCell
         
         var test = cell.titleLabel.text

@@ -25,7 +25,7 @@
 Tap on any recipe entry in the search results to go the Spoonacular website and view the full recipe and ingredients required.
 
 Disclaimer:
-All recipes provided by this app are property of Spoonacular (https://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</mutableString>
+All recipes provided by this app are property of Spoonacular (http://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</mutableString>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
