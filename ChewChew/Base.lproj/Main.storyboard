@@ -5,6 +5,54 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--About-->
+        <scene sceneID="TOe-Kx-Ohc">
+            <objects>
+                <viewController id="uKq-iY-fjQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KKN-cw-RLq"/>
+                        <viewControllerLayoutGuide type="bottom" id="k5G-gw-hp5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tIQ-S8-stL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xz-E8-Zuq">
+                                <rect key="frame" x="0.0" y="32" width="600" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Welcome to ChewChew, an app that lets you find recipes that use ingredients you already have! Simply add whatever ingredients you have available to cook with and ChewChew will do the rest.
+
+Tap on any recipe entry in the search results to go the Spoonacular website and view the full recipe and ingredients required.
+
+Disclaimer:
+All recipes provided by this app are property of Spoonacular (https://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</mutableString>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" constant="-32" id="2EJ-cR-GTF"/>
+                            <constraint firstItem="k5G-gw-hp5" firstAttribute="top" secondItem="7xz-E8-Zuq" secondAttribute="bottom" constant="20" id="Acp-Uq-khn"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" id="Hpm-q9-spq"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="trailing" secondItem="tIQ-S8-stL" secondAttribute="trailingMargin" id="P6G-7T-mVF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-16" id="XBX-8w-Akj"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-16" id="lf9-yU-2hN"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Hpm-q9-spq"/>
+                                <exclude reference="P6G-7T-mVF"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="mDB-Xg-lMi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w2A-aF-Hxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2029" y="-437"/>
+        </scene>
         <!--Home-->
         <scene sceneID="zjv-9d-ioV">
             <objects>
@@ -62,7 +110,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="Enable to exclude recipes that require too many additional ingredients" id="NIB-hm-CUv">
+                            <tableViewSection footerTitle="Enable to exclude recipes that require a large number of additional ingredients" id="NIB-hm-CUv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -76,7 +124,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ykg-dW-0XD">
-                                                    <rect key="frame" x="538" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="539" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="saveSwitchChange:" destination="v3Z-1u-EoJ" eventType="valueChanged" id="3gM-0B-fxy"/>
                                                     </connections>
@@ -85,16 +133,22 @@
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="riV-DE-3n9" secondAttribute="centerY" id="GH0-9K-OMs"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ykg-dW-0XD" secondAttribute="bottom" constant="-2" id="K6C-of-sQm"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ykg-dW-0XD" secondAttribute="trailing" constant="5" id="LMx-ln-65c"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ykg-dW-0XD" secondAttribute="trailing" constant="4" id="LMx-ln-65c"/>
+                                                <constraint firstItem="ykg-dW-0XD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="riV-DE-3n9" secondAttribute="trailing" constant="10" id="XHj-7c-eMw"/>
                                                 <constraint firstItem="ykg-dW-0XD" firstAttribute="top" secondItem="pc8-Rj-JXk" secondAttribute="topMargin" constant="-2" id="fbY-VH-taQ"/>
                                                 <constraint firstAttribute="centerY" secondItem="ykg-dW-0XD" secondAttribute="centerY" id="gHM-bS-Ux0"/>
                                                 <constraint firstItem="riV-DE-3n9" firstAttribute="leading" secondItem="pc8-Rj-JXk" secondAttribute="leadingMargin" constant="7" id="oVg-8M-uZV"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="XHj-7c-eMw"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle=" " id="1n8-Me-AYO">
+                            <tableViewSection headerTitle=" " footerTitle="Recipes by Spoonacular" id="1n8-Me-AYO">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchCell" textLabel="g61-5l-hmS" style="IBUITableViewCellStyleDefault" id="kHM-gV-L3G" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -118,7 +172,13 @@
                             <outlet property="delegate" destination="v3Z-1u-EoJ" id="1H6-xw-EXR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Home" id="Vk4-9j-Zbw"/>
+                    <navigationItem key="navigationItem" title="Home" id="Vk4-9j-Zbw">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="wcW-1W-HBD">
+                            <connections>
+                                <segue destination="uKq-iY-fjQ" kind="show" identifier="About" id="1wr-lO-bhe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
@@ -218,7 +278,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="250" id="S5I-tj-ShR" customClass="RecipeTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="250" id="S5I-tj-ShR" customClass="RecipeTableViewCell" customModule="ChewChew" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5I-tj-ShR" id="ahB-Fd-Mpy">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -283,6 +343,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipes" id="Nik-BZ-5Yc"/>
+                    <connections>
+                        <segue destination="jiY-Af-gvI" kind="show" identifier="ShowRecipe" id="KqH-JG-i0v"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCd-il-FyB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,6 +417,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ek7-hK-Juy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1217" y="278"/>
+        </scene>
+        <!--Recipe View-->
+        <scene sceneID="J7h-xf-IUi">
+            <objects>
+                <viewController id="jiY-Af-gvI" customClass="RecipeDisplayViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fWE-g8-I2B"/>
+                        <viewControllerLayoutGuide type="bottom" id="ecD-j8-o0c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6lY-RK-eMh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sNp-Ri-Ift">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVy-MM-9Zz">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="stop" id="eKJ-oC-AAV">
+                                        <connections>
+                                            <action selector="stop:" destination="jiY-Af-gvI" id="FLV-jL-rjB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="47" style="plain" systemItem="fixedSpace" id="m8a-l7-SBd"/>
+                                    <barButtonItem systemItem="refresh" id="znT-ES-GxZ">
+                                        <connections>
+                                            <action selector="doRefresh:" destination="jiY-Af-gvI" id="aJL-jJ-2Um"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="flO-GO-u7j"/>
+                                    <barButtonItem systemItem="rewind" id="Nlc-fY-yiI">
+                                        <connections>
+                                            <action selector="goBack:" destination="jiY-Af-gvI" id="C2I-km-H2a"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="47" style="plain" systemItem="fixedSpace" id="b5K-Jd-Nv6"/>
+                                    <barButtonItem systemItem="fastForward" id="09Q-Gv-1J8">
+                                        <connections>
+                                            <action selector="goForward:" destination="jiY-Af-gvI" id="hzK-3U-I6g"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-DW-RZ7">
+                                <rect key="frame" x="290" y="268" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sNp-Ri-Ift" secondAttribute="trailing" constant="-16" id="3gZ-IJ-BYB"/>
+                            <constraint firstItem="EKi-DW-RZ7" firstAttribute="centerY" secondItem="sNp-Ri-Ift" secondAttribute="centerY" id="3yd-xf-eR8"/>
+                            <constraint firstItem="eVy-MM-9Zz" firstAttribute="top" secondItem="sNp-Ri-Ift" secondAttribute="bottom" id="6f1-ps-ujB"/>
+                            <constraint firstItem="eVy-MM-9Zz" firstAttribute="leading" secondItem="6lY-RK-eMh" secondAttribute="leadingMargin" constant="-16" id="7MU-V6-QaB"/>
+                            <constraint firstItem="sNp-Ri-Ift" firstAttribute="top" secondItem="fWE-g8-I2B" secondAttribute="bottom" id="Fh2-Ce-DNI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eVy-MM-9Zz" secondAttribute="trailing" constant="-16" id="ORx-tu-PEi"/>
+                            <constraint firstItem="EKi-DW-RZ7" firstAttribute="centerX" secondItem="eVy-MM-9Zz" secondAttribute="centerX" id="Pxc-VX-BC3"/>
+                            <constraint firstItem="sNp-Ri-Ift" firstAttribute="leading" secondItem="6lY-RK-eMh" secondAttribute="leadingMargin" constant="-16" id="d7h-Qw-ugL"/>
+                            <constraint firstItem="ecD-j8-o0c" firstAttribute="top" secondItem="eVy-MM-9Zz" secondAttribute="bottom" id="iao-Iy-j35"/>
+                            <constraint firstItem="sNp-Ri-Ift" firstAttribute="top" secondItem="6lY-RK-eMh" secondAttribute="topMargin" id="oHi-zE-O8V"/>
+                            <constraint firstItem="eVy-MM-9Zz" firstAttribute="top" secondItem="sNp-Ri-Ift" secondAttribute="bottom" id="utN-Jo-3Uh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Fh2-Ce-DNI"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Recipe View" id="LRe-73-8cI"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="EKi-DW-RZ7" id="aUT-eu-dGY"/>
+                        <outlet property="webView" destination="sNp-Ri-Ift" id="Gv0-Yq-orC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mcD-LS-I9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="1021"/>
         </scene>
     </scenes>
     <resources>

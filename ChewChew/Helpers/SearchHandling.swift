@@ -9,6 +9,7 @@
 import Foundation
 import SwiftHTTP
 import UIKit
+import Mixpanel
 
 struct SearchHandling {
     
@@ -54,6 +55,9 @@ struct SearchHandling {
                             sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredients"
                         }
                         
+                        //Set the missingCount of the Recipe
+                        sender.currentRecipe!.missingCount.value = missedCount
+                        
                         //Set the id of the recipe
                         sender.currentRecipe!.id.value = json[i]["id"] as! Int
                         
@@ -76,6 +80,8 @@ struct SearchHandling {
                         
                         //Add the recipe to the list to display in RecipesListTable VC
                         (shareData.recipes.value).append(sender.currentRecipe!)
+                        shareData.recipes.value.sort { $0.missingCount.value < $1.missingCount.value }
+                        NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                         if shareData.recipes.value.count == 20 {
                             break
                         }
@@ -86,11 +92,12 @@ struct SearchHandling {
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                     
                     sender.presentViewController(alertController, animated: true, completion: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("nothingLoaded", object: nil)
+                    sender.mixpanel.track("Error", properties: ["Cause" : "No Recipes Found"])
                 }
                 
                 println((shareData.recipes.value).count)
                 sender.backgroundTaskIsDone = true
-                NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                 
             } else {
                 println("Unexpected error with the JSON object")
@@ -99,6 +106,8 @@ struct SearchHandling {
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                 
                 sender.presentViewController(alertController, animated: true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("nothingLoaded", object: nil)
+                sender.mixpanel.track("Error", properties: ["Cause" : "Error with JSON"])
             }
         }
     }

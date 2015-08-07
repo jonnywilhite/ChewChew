@@ -26,6 +26,7 @@ class HomeTableViewController: UITableViewController {
     @IBOutlet weak var detailLabel : UILabel!
     @IBAction func saveSwitchChange(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(limitSwitch.on, forKey: "switchState")
+        mixpanel.track("Switch Button Tapped")
     }
     
     //MARK: View openings
@@ -111,7 +112,6 @@ class HomeTableViewController: UITableViewController {
         } else if (indexPath.section == 2) {
             return
         } else if (indexPath.section == 3) {
-            mixpanel.track("Search")
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
             var ingredientsAsAString = ""
@@ -126,14 +126,22 @@ class HomeTableViewController: UITableViewController {
             var request = HTTPTask()
             if limitSwitch.on {
                 numParam = 200
+                mixpanel.track("Search", properties: ["Switch":"Enabled"])
             } else {
                 numParam = 15
+                mixpanel.track("Search", properties: ["Switch":"Disabled"])
             }
             var params = ["ingredients": ingredientsAsAString, "number": "\(numParam)"]
             let searchHandler = SearchHandling()
             searchHandler.makeGETRequest(request, params: params, sender: self)
             
             self.performSegueWithIdentifier("SearchRecipes", sender: self)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "About" {
+            mixpanel.track("About Page Viewed")
         }
     }
 }

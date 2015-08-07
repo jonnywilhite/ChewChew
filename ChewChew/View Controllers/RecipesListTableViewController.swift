@@ -15,7 +15,7 @@ import Mixpanel
 class RecipesListTableViewController: UITableViewController {
     
     var indicator : UIActivityIndicatorView!
-    
+    var urlToOpen : NSURL!
     var mixpanel : Mixpanel!
     
     var tableViewDataSourceBond: UITableViewDataSourceBond<RecipeTableViewCell>!
@@ -42,6 +42,7 @@ class RecipesListTableViewController: UITableViewController {
         shareData.recipes ->> recipes
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList", name: "load", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "stopSpinning", name: "nothingLoaded", object: nil)
         recipes.map { [unowned self] (recipe: Recipe) -> RecipeTableViewCell in
             let cell = self.tableView.dequeueReusableCellWithIdentifier("RecipeCell") as! RecipeTableViewCell
             cell.recipe = recipe
@@ -60,6 +61,13 @@ class RecipesListTableViewController: UITableViewController {
     func loadList() {
         NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.tableView.reloadData()
+        }
+    }
+    
+    func stopSpinning() {
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.indicator.stopAnimating()
+            self.indicator.hidesWhenStopped = true
         }
     }
     
@@ -91,8 +99,16 @@ class RecipesListTableViewController: UITableViewController {
             stringTestTwo = String(testTwo!)
             urlString += stringTestTwo
         }
-        let url = NSURL(string: urlString)
-        UIApplication.sharedApplication().openURL(url!)
+        self.urlToOpen = NSURL(string: urlString)
+        performSegueWithIdentifier("ShowRecipe", sender: self)
+        //UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowRecipe" {
+            let destVC : RecipeDisplayViewController = segue.destinationViewController as! RecipeDisplayViewController
+            destVC.urlToOpen = self.urlToOpen
+        }
     }
     
     func activityIndicator() {

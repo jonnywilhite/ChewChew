@@ -18,5 +18,7 @@ class Recipe : NSObject {
     var image : Dynamic<UIImage?> = Dynamic(nil)
     var id : Dynamic<Int> = Dynamic(0)
     
+    var missingCount : Dynamic<Int> = Dynamic(0)
+    
     static var imageCache : NSCacheSwift<String, UIImage>!
 }
