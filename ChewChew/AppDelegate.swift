@@ -22,21 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mixpanel: Mixpanel = Mixpanel.sharedInstance()
         mixpanel.track("App launched")
         
-        /*
+        
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        UINavigationBar.appearance().barTintColor = UIColor(red: 239.0/255.0, green: 159.0/255.0, blue: 12.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 240.0/255.0, green: 161.0/255.0, blue: 15.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        UINavigationBar.appearance().translucent = false*/
+        UINavigationBar.appearance().translucent = true
+        
+        var titleBarAttributes : NSMutableDictionary = NSMutableDictionary(dictionary: UINavigationBar.appearance().titleTextAttributes!)
+        titleBarAttributes.setValue(UIFont(name: "Avenir-Medium", size: 18), forKey: NSFontAttributeName)
+        UINavigationBar.appearance().titleTextAttributes = titleBarAttributes as [NSObject : AnyObject]
+        
+        
         
         // Inside your application(application:didFinishLaunchingWithOptions:)
         
         // Notice setSchemaVersion is set to 1, this is always set manually. It must be
         // higher than the previous version (oldSchemaVersion) or an RLMException is thrown
-        setSchemaVersion(2, Realm.defaultPath, { migration, oldSchemaVersion in
+        setSchemaVersion(3, Realm.defaultPath, { migration, oldSchemaVersion in
             // We haven’t migrated anything yet, so oldSchemaVersion == 0
-            if oldSchemaVersion < 2 {
+            if oldSchemaVersion < 3 {
                 // Nothing to do!
                 // Realm will automatically detect new properties and removed properties
                 // And will update the schema on disk automatically

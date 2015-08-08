@@ -27,7 +27,7 @@ Tap on any recipe entry in the search results to go the Spoonacular website and 
 Disclaimer:
 All recipes provided by this app are property of Spoonacular (http://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</mutableString>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -35,15 +35,23 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         <constraints>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" constant="-32" id="2EJ-cR-GTF"/>
                             <constraint firstItem="k5G-gw-hp5" firstAttribute="top" secondItem="7xz-E8-Zuq" secondAttribute="bottom" constant="20" id="Acp-Uq-khn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-16" id="Dkr-Uv-Q1V"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" id="Hpm-q9-spq"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="trailing" secondItem="tIQ-S8-stL" secondAttribute="trailingMargin" id="P6G-7T-mVF"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-16" id="Tb5-Zn-Dja"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-16" id="XBX-8w-Akj"/>
+                            <constraint firstItem="k5G-gw-hp5" firstAttribute="top" secondItem="7xz-E8-Zuq" secondAttribute="bottom" constant="20" id="lIe-Qc-17f"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-16" id="lf9-yU-2hN"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="tIQ-S8-stL" secondAttribute="topMargin" constant="32" id="zzF-8I-EQR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="2EJ-cR-GTF"/>
                                 <exclude reference="Hpm-q9-spq"/>
                                 <exclude reference="P6G-7T-mVF"/>
+                                <exclude reference="XBX-8w-Akj"/>
+                                <exclude reference="lf9-yU-2hN"/>
+                                <exclude reference="Acp-Uq-khn"/>
                             </mask>
                         </variation>
                     </view>
@@ -60,7 +68,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="oEt-0q-8ng">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Pantry" footerTitle="A list of common household ingredients that can be added to your list with a single tap" id="cPE-pB-qYu">
                                 <cells>
@@ -182,11 +190,12 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="aboutButton" destination="wcW-1W-HBD" id="9HU-UB-wjX"/>
                         <outlet property="detailLabel" destination="b8y-sZ-Ach" id="oMd-y3-5H3"/>
                         <outlet property="limitSwitch" destination="ykg-dW-0XD" id="VMK-ZN-WEh"/>
                         <segue destination="Qn6-Ab-n01" kind="show" identifier="SearchRecipes" id="D6G-5v-mcl"/>
-                        <segue destination="08q-pa-yvm" kind="show" identifier="ShowPantry" id="U1Y-4v-U9g"/>
                         <segue destination="7BU-U6-VyA" kind="show" identifier="ShowIngredients" id="4bc-bj-5D8"/>
+                        <segue destination="IZE-G4-vIn" kind="show" identifier="ShowPantry" id="wQw-bG-foL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2So-Uc-Qrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,11 +215,11 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NH-2P-6zP">
-                                <rect key="frame" x="216" y="513" width="168" height="33"/>
+                                <rect key="frame" x="211" y="510" width="178" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="168" id="Xbi-gp-4g8"/>
+                                    <constraint firstAttribute="width" constant="178" id="Xbi-gp-4g8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Clear All Ingredients">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -352,53 +361,74 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
             <point key="canvasLocation" x="2029" y="1021"/>
         </scene>
         <!--Pantry-->
-        <scene sceneID="ije-mn-CWG">
+        <scene sceneID="Hah-qL-pbE">
             <objects>
-                <tableViewController id="08q-pa-yvm" customClass="PantryTableViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hdR-v3-EJ9">
+                <viewController id="IZE-G4-vIn" customClass="PantryListViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CgO-1W-dWN"/>
+                        <viewControllerLayoutGuide type="bottom" id="ucI-QU-pMC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="anW-Dq-iTM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iO5-Cj-UuA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="v9r-gg-trH">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PantryCell" id="CTr-wS-NAX" customClass="PantryTableViewCell" customModule="ChewChew" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CTr-wS-NAX" id="6mP-vP-uwi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKC-Hf-0FK">
+                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="EKC-Hf-0FK" secondAttribute="centerY" id="j25-m7-4JA"/>
+                                                <constraint firstItem="EKC-Hf-0FK" firstAttribute="leading" secondItem="6mP-vP-uwi" secondAttribute="leadingMargin" id="oc9-z1-Vty"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PantryCell" id="apQ-v7-hca" customClass="PantryTableViewCell" customModule="ChewChew" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="apQ-v7-hca" id="c3w-ck-LL8">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDE-j0-pwJ">
-                                            <rect key="frame" x="8" y="22" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="WDE-j0-pwJ" secondAttribute="centerY" id="C5e-Ih-kx1"/>
-                                        <constraint firstItem="WDE-j0-pwJ" firstAttribute="leading" secondItem="c3w-ck-LL8" secondAttribute="leadingMargin" id="ajV-1y-kYU"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="08q-pa-yvm" id="EX5-QP-8z5"/>
-                            <outlet property="delegate" destination="08q-pa-yvm" id="gcO-Fd-PJf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Pantry" id="vSE-2K-Xxr">
-                        <barButtonItem key="rightBarButtonItem" title="Uncheck All" id="TvO-0j-bHl">
-                            <connections>
-                                <action selector="checkOrUncheckAll:" destination="08q-pa-yvm" id="WhS-BZ-Vf2"/>
-                            </connections>
-                        </barButtonItem>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="iO5-Cj-UuA" secondAttribute="trailing" constant="-16" id="Aft-ds-VEq"/>
+                            <constraint firstItem="ucI-QU-pMC" firstAttribute="top" secondItem="iO5-Cj-UuA" secondAttribute="bottom" id="PyT-gb-AJC"/>
+                            <constraint firstItem="iO5-Cj-UuA" firstAttribute="leading" secondItem="anW-Dq-iTM" secondAttribute="leadingMargin" constant="-16" id="RBa-eD-uB5"/>
+                            <constraint firstItem="iO5-Cj-UuA" firstAttribute="top" secondItem="anW-Dq-iTM" secondAttribute="topMargin" id="T2g-lh-BRZ"/>
+                            <constraint firstItem="iO5-Cj-UuA" firstAttribute="top" secondItem="CgO-1W-dWN" secondAttribute="bottom" id="exW-l3-cbJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="exW-l3-cbJ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pantry" id="pPz-JU-zyB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="0EB-A2-sE1"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="checkUncheckAllButton" destination="TvO-0j-bHl" id="kyM-pR-iDA"/>
+                        <outlet property="editButton" destination="0EB-A2-sE1" id="OCu-R2-DJc"/>
+                        <outlet property="searchBar" destination="v9r-gg-trH" id="EI5-dI-ME9"/>
+                        <outlet property="tableView" destination="iO5-Cj-UuA" id="oiw-et-1sJ"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FId-Co-xP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBU-WL-yXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2715" y="1021"/>
+            <point key="canvasLocation" x="1317" y="1021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AGV-Bl-ehV">
@@ -416,7 +446,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ek7-hK-Juy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="278"/>
+            <point key="canvasLocation" x="1317" y="278"/>
         </scene>
         <!--Recipe View-->
         <scene sceneID="J7h-xf-IUi">
@@ -494,7 +524,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcD-LS-I9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="1021"/>
+            <point key="canvasLocation" x="2715" y="1021"/>
         </scene>
     </scenes>
     <resources>

@@ -29,6 +29,11 @@ class RecipesListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem(title: "Recipes", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        backButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
+        navigationItem.backBarButtonItem = backButton
+        
         self.tableView.separatorColor = UIColor.whiteColor()
         mixpanel = Mixpanel.sharedInstance()
         indicator = UIActivityIndicatorView()
@@ -101,7 +106,6 @@ class RecipesListTableViewController: UITableViewController {
         }
         self.urlToOpen = NSURL(string: urlString)
         performSegueWithIdentifier("ShowRecipe", sender: self)
-        //UIApplication.sharedApplication().openURL(url!)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -114,7 +118,7 @@ class RecipesListTableViewController: UITableViewController {
     func activityIndicator() {
         indicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        indicator.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 200)//self.view.center
+        indicator.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 200)
         self.view.addSubview(indicator)
     }
 }

@@ -97,7 +97,6 @@ struct SearchHandling {
                 }
                 
                 println((shareData.recipes.value).count)
-                sender.backgroundTaskIsDone = true
                 
             } else {
                 println("Unexpected error with the JSON object")

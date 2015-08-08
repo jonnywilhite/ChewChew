@@ -17,11 +17,10 @@ class HomeTableViewController: UITableViewController {
     var mixpanel : Mixpanel!
     
     @IBOutlet weak var limitSwitch: UISwitch!
+    @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     var currentRecipe : Recipe?
     var ingredients : Results<Ingredient>!
-    
-    var backgroundTaskIsDone : Bool = false
 
     @IBOutlet weak var detailLabel : UILabel!
     @IBAction func saveSwitchChange(sender: AnyObject) {
@@ -33,31 +32,34 @@ class HomeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem(title: "Home", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        backButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
+        navigationItem.backBarButtonItem = backButton
+        aboutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
+        
         mixpanel = Mixpanel.sharedInstance()
         limitSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("switchState")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         tableView.reloadData()
-        backgroundTaskIsDone = false
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: Table Setup
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = TableViewCell()
         
         if indexPath.section == 0 {
             
-            let y = PantryTableViewController.getNumberOfIngredients(PantryTableViewController())()
+            let y = PantryListViewController.getNumberOfIngredients(PantryListViewController())()
             if y == 1 {
                 cell.textLabel?.text = "\(y) Item Checked"
             } else {
@@ -76,7 +78,6 @@ class HomeTableViewController: UITableViewController {
             }
             cell.detailTextLabel?.text = "View Full List"
             cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
-            
             
         } else if indexPath.section == 2 {
             cell.textLabel?.text = "Limit Search Results"
@@ -114,11 +115,12 @@ class HomeTableViewController: UITableViewController {
         } else if (indexPath.section == 3) {
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
+            let ingredientsToSearchWith = ingredients.filter("isChecked = true")
             var ingredientsAsAString = ""
             
-            for (var i = 0; i < ingredients.count; i++) {
-                ingredientsAsAString += ingredients[i].name
-                if (i != ingredients.count - 1) {
+            for (var i = 0; i < ingredientsToSearchWith.count; i++) {
+                ingredientsAsAString += ingredientsToSearchWith[i].name
+                if (i != ingredientsToSearchWith.count - 1) {
                     ingredientsAsAString += ","
                 }
             }
