@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mixpanel.track("App launched")
         
         
+        
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 240.0/255.0, green: 161.0/255.0, blue: 15.0/255.0, alpha: 1.0)
@@ -40,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Notice setSchemaVersion is set to 1, this is always set manually. It must be
         // higher than the previous version (oldSchemaVersion) or an RLMException is thrown
-        setSchemaVersion(3, Realm.defaultPath, { migration, oldSchemaVersion in
+        setSchemaVersion(6, Realm.defaultPath, { migration, oldSchemaVersion in
             // We haven’t migrated anything yet, so oldSchemaVersion == 0
-            if oldSchemaVersion < 3 {
+            if oldSchemaVersion < 6 {
                 // Nothing to do!
                 // Realm will automatically detect new properties and removed properties
                 // And will update the schema on disk automatically
@@ -52,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Realm will automatically perform the migration and opening the Realm will succeed
         // i.e. Realm()
         // Override point for customization after application launch.
+        
+        let realm = Realm()
+        if !NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            realm.write() {
+                realm.deleteAll()
+            }
+            let pantry = Pantry.sharedInstance
+            pantry.setUpPantry()
+        }
         return true
     }
 

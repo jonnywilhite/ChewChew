@@ -20,12 +20,12 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xz-E8-Zuq">
                                 <rect key="frame" x="0.0" y="32" width="600" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Welcome to ChewChew, an app that lets you find recipes that use ingredients you already have! Simply add whatever ingredients you have available to cook with and ChewChew will do the rest.
+                                <string key="text">Welcome to ChewChew, an app that lets you find recipes that use ingredients you already have! Simply add whatever ingredients you have available to cook with and ChewChew will do the rest.
 
 Tap on any recipe entry in the search results to go the Spoonacular website and view the full recipe and ingredients required.
 
 Disclaimer:
-All recipes provided by this app are property of Spoonacular (http://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</mutableString>
+All recipes provided by this app are property of Spoonacular (http://spoonacular.com), and they are made available thanks to the WebKnox Recipes API. All images and search results are property of WebKnox.</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -378,7 +378,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="v9r-gg-trH">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PantryCell" id="CTr-wS-NAX" customClass="PantryTableViewCell" customModule="ChewChew" customModuleProvider="target">
@@ -387,8 +387,8 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CTr-wS-NAX" id="6mP-vP-uwi">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKC-Hf-0FK">
-                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKC-Hf-0FK">
+                                                    <rect key="frame" x="8" y="22" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -418,10 +418,14 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Pantry" id="pPz-JU-zyB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="0EB-A2-sE1"/>
+                        <barButtonItem key="rightBarButtonItem" title="Uncheck All" id="0EB-A2-sE1">
+                            <connections>
+                                <action selector="clearButtonTapped:" destination="IZE-G4-vIn" id="F7G-Zp-QDQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editButton" destination="0EB-A2-sE1" id="OCu-R2-DJc"/>
+                        <outlet property="clearButton" destination="0EB-A2-sE1" id="ugs-sv-dQS"/>
                         <outlet property="searchBar" destination="v9r-gg-trH" id="EI5-dI-ME9"/>
                         <outlet property="tableView" destination="iO5-Cj-UuA" id="oiw-et-1sJ"/>
                     </connections>

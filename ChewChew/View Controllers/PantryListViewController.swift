@@ -22,7 +22,6 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
     var checkedIngredients : Results<Ingredient>!
     var ingredientsToCheck : Results<Ingredient>!
     var currentPantryIngredient : Ingredient?
-    var tap: UITapGestureRecognizer!
     
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var searchBar : UISearchBar!
@@ -41,31 +40,52 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
                 searchBar.resignFirstResponder()
                 searchBar.text = ""
                 searchBar.showsCancelButton = false
-                self.view.removeGestureRecognizer(self.tap)
             case .SearchMode:
                 let searchText = searchBar?.text ?? ""
                 searchBar.setShowsCancelButton(true, animated: true)
-                ingredients = searchIngredients(searchText)
-                self.view.addGestureRecognizer(self.tap)
+                ingredients = searchIngredients(searchText).sorted("name", ascending: true)
             }
         }
     }
     
-    @IBOutlet weak var editButton : UIBarButtonItem!
+    @IBOutlet weak var clearButton : UIBarButtonItem!
+    @IBAction func clearButtonTapped(sender: UIBarButtonItem) {
+        
+        let realm = Realm()
+        realm.write() {
+            for ingredient in self.ingredients {
+                ingredient.isChecked = false
+            }
+        }
+        checkedIngredients = ingredients.filter("isChecked = true")
+        sender.enabled = false
+        tableView.reloadData()
+        
+//        if state == State.DefaultMode && checkedIngredients.count == 0 {
+//            tableView.setEditing(true, animated: true)
+//            sender.title = "Done"
+//        } else {
+//            tableView.setEditing(false, animated: true)
+//            sender.title = "Edit"
+//        }
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        editButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
+        let realm = Realm()
+        ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
+        checkedIngredients = ingredients.filter("isChecked = true")
+        
+        clearButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
+        if checkedIngredients.count == 0 {
+            clearButton.enabled = false
+        }
         mixpanel = Mixpanel.sharedInstance()
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
-        let realm = Realm()
-        ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
-        checkedIngredients = ingredients.filter("isChecked = true")
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,11 +103,6 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
         let searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchString)
         return realm.objects(Ingredient).filter(searchPredicate).sorted("name", ascending: true)
     }
-    
-    func dismissKeyboard(){
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        searchBar.resignFirstResponder()
-    }
 }
 
 extension PantryListViewController: UITableViewDelegate {
@@ -102,20 +117,24 @@ extension PantryListViewController: UITableViewDelegate {
             realm.write() {
                 self.currentPantryIngredient!.isChecked = true
             }
+            searchBar.text = nil
+            ingredients = searchIngredients(searchBar.text).sorted("name", ascending: true)
             mixpanel.track("Added Ingredient", properties: ["Style" : "CheckOne"])
         } else {
             realm.write() {
                 self.currentPantryIngredient!.isChecked = false
             }
+            searchBar.text = nil
+            ingredients = searchIngredients(searchBar.text).sorted("name", ascending: true)
             mixpanel.track("Deleted Ingredient", properties: ["Style" : "UncheckOne"])
         }
         
         checkedIngredients = ingredients.filter("isChecked = true")
-//        if checkedIngredients.count == ingredients.count {
-//            self.checkUncheckAllButton.title = "Uncheck All"
-//        } else {
-//            self.checkUncheckAllButton.title = "Check All"
-//        }
+        if checkedIngredients.count > 0 {
+            self.clearButton.enabled = true
+        } else {
+            self.clearButton.enabled = false
+        }
         tableView.reloadData()
     }
 }
@@ -155,5 +174,4 @@ extension PantryListViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         ingredients = searchIngredients(searchText)
     }
-    
 }

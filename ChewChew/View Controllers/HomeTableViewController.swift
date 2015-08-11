@@ -123,6 +123,10 @@ class HomeTableViewController: UITableViewController {
                 if (i != ingredientsToSearchWith.count - 1) {
                     ingredientsAsAString += ","
                 }
+                if ingredientsToSearchWith[i].name == "Chicken" {
+                    ingredientsAsAString += "chicken breasts,chicken bone,chicken breast,chicken legs,chicken thighs,"
+                    
+                }
             }
             var numParam : Int!
             var request = HTTPTask()
