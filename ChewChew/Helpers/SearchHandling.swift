@@ -80,7 +80,7 @@ struct SearchHandling {
                         
                         //Add the recipe to the list to display in RecipesListTable VC
                         (shareData.recipes.value).append(sender.currentRecipe!)
-                        //shareData.recipes.value.sort { $0.missingCount.value < $1.missingCount.value }
+                        shareData.recipes.value.sort { $0.missingCount.value < $1.missingCount.value }
                         NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                         if shareData.recipes.value.count == 20 {
                             break
@@ -97,6 +97,15 @@ struct SearchHandling {
                 }
                 
                 println((shareData.recipes.value).count)
+                if shareData.recipes.value.count == 0 {
+                    let alertController = UIAlertController(title: "Error", message:
+                        "No recipes found that match your current parameters", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                    
+                    sender.presentViewController(alertController, animated: true, completion: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("nothingLoaded", object: nil)
+                    sender.mixpanel.track("Error", properties: ["Cause" : "No Recipes Found"])
+                }
                 
             } else {
                 println("Unexpected error with the JSON object")

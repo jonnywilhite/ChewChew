@@ -69,21 +69,19 @@ class HomeTableViewController: UITableViewController {
             cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
             
         } else if (indexPath.section == 1) {
-            
-            let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
+            cell.textLabel?.text = "Limit Search Results"
+            cell.accessoryView = limitSwitch
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            /*let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
             if x == 1 {
                 cell.textLabel?.text = "\(x) Item"
             } else {
                 cell.textLabel?.text = "\(x) Items"
             }
             cell.detailTextLabel?.text = "View Full List"
-            cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
+            cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!*/
             
-        } else if indexPath.section == 2 {
-            cell.textLabel?.text = "Limit Search Results"
-            cell.accessoryView = limitSwitch
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-        } else {
+        } else /*if indexPath.section == 2*/ {
             cell.textLabel?.text = "Search Recipes"
             var myColor = UIColor(red: 24.0/255.0, green: 108.0/255.0, blue: 254.0/255.0, alpha: 1.0)
             cell.textLabel?.textColor = myColor
@@ -94,7 +92,7 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             return nil
         } else {
             return indexPath
@@ -108,11 +106,10 @@ class HomeTableViewController: UITableViewController {
             self.performSegueWithIdentifier("ShowPantry", sender: self)
             mixpanel.track("Show", properties: ["Screen" : "Pantry"])
         } else if (indexPath.section == 1) {
-            self.performSegueWithIdentifier("ShowIngredients", sender: self)
-            mixpanel.track("Show", properties: ["Screen" : "Other Ingredients"])
-        } else if (indexPath.section == 2) {
             return
-        } else if (indexPath.section == 3) {
+            /*self.performSegueWithIdentifier("ShowIngredients", sender: self)
+            mixpanel.track("Show", properties: ["Screen" : "Other Ingredients"])*/
+        } else if (indexPath.section == 2) {
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
             let ingredientsToSearchWith = ingredients.filter("isChecked = true")
