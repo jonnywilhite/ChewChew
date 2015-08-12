@@ -349,7 +349,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iO5-Cj-UuA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="v9r-gg-trH">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -378,18 +378,41 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Ingredient..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="azc-Aq-3pe">
+                                <rect key="frame" x="16" y="553" width="484" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6X-Nk-sUT">
+                                <rect key="frame" x="531" y="557" width="22" height="22"/>
+                                <color key="tintColor" red="0.16862745100000001" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="IZE-G4-vIn" eventType="touchUpInside" id="v0z-Am-GeA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="k6X-Nk-sUT" firstAttribute="leading" secondItem="azc-Aq-3pe" secondAttribute="trailing" constant="31" id="5Qc-X8-yZf"/>
+                            <constraint firstItem="azc-Aq-3pe" firstAttribute="top" secondItem="iO5-Cj-UuA" secondAttribute="bottom" constant="17" id="99G-Oe-qSg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iO5-Cj-UuA" secondAttribute="trailing" constant="-16" id="Aft-ds-VEq"/>
-                            <constraint firstItem="ucI-QU-pMC" firstAttribute="top" secondItem="iO5-Cj-UuA" secondAttribute="bottom" id="PyT-gb-AJC"/>
+                            <constraint firstItem="azc-Aq-3pe" firstAttribute="leading" secondItem="anW-Dq-iTM" secondAttribute="leadingMargin" id="Fxb-iA-2Z8"/>
+                            <constraint firstItem="ucI-QU-pMC" firstAttribute="top" secondItem="azc-Aq-3pe" secondAttribute="bottom" constant="17" id="Gje-hv-yfd"/>
+                            <constraint firstItem="ucI-QU-pMC" firstAttribute="top" secondItem="iO5-Cj-UuA" secondAttribute="bottom" constant="64" id="PyT-gb-AJC"/>
                             <constraint firstItem="iO5-Cj-UuA" firstAttribute="leading" secondItem="anW-Dq-iTM" secondAttribute="leadingMargin" constant="-16" id="RBa-eD-uB5"/>
                             <constraint firstItem="iO5-Cj-UuA" firstAttribute="top" secondItem="anW-Dq-iTM" secondAttribute="topMargin" id="T2g-lh-BRZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k6X-Nk-sUT" secondAttribute="trailing" constant="31" id="ao9-vQ-V8w"/>
                             <constraint firstItem="iO5-Cj-UuA" firstAttribute="top" secondItem="CgO-1W-dWN" secondAttribute="bottom" id="exW-l3-cbJ"/>
+                            <constraint firstItem="k6X-Nk-sUT" firstAttribute="top" secondItem="iO5-Cj-UuA" secondAttribute="bottom" constant="21" id="lt1-4N-1qr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="azc-Aq-3pe" secondAttribute="trailing" constant="84" id="oMk-0h-L7u"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="exW-l3-cbJ"/>
+                                <exclude reference="PyT-gb-AJC"/>
                             </mask>
                         </variation>
                     </view>
@@ -404,6 +427,8 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         <outlet property="clearButton" destination="0EB-A2-sE1" id="ugs-sv-dQS"/>
                         <outlet property="searchBar" destination="v9r-gg-trH" id="EI5-dI-ME9"/>
                         <outlet property="tableView" destination="iO5-Cj-UuA" id="oiw-et-1sJ"/>
+                        <outlet property="textField" destination="azc-Aq-3pe" id="VvF-34-TrD"/>
+                        <outlet property="textFieldBottomSpace" destination="Gje-hv-yfd" id="ZR9-gy-sOS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBU-WL-yXt" userLabel="First Responder" sceneMemberID="firstResponder"/>

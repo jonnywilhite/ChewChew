@@ -107,12 +107,21 @@ class HomeTableViewController: UITableViewController {
             mixpanel.track("Show", properties: ["Screen" : "Pantry"])
         } else if (indexPath.section == 1) {
             return
-            /*self.performSegueWithIdentifier("ShowIngredients", sender: self)
-            mixpanel.track("Show", properties: ["Screen" : "Other Ingredients"])*/
         } else if (indexPath.section == 2) {
             let realm = Realm()
             ingredients = realm.objects(Ingredient)
             let ingredientsToSearchWith = ingredients.filter("isChecked = true")
+            if ingredientsToSearchWith.count == 0 {
+                let alertController = UIAlertController(title: "No Ingredients Added", message:
+                    "Please add at least one ingredient from the pantry", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+                
+                presentViewController(alertController, animated: true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("nothingLoaded", object: nil)
+                mixpanel.track("Error", properties: ["Cause" : "No Ingredients Entered"])
+                tableView.reloadData()
+                return
+            }
             var ingredientsAsAString = ""
             
             for (var i = 0; i < ingredientsToSearchWith.count; i++) {

@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 import Mixpanel
+import ConvenienceKit
 
-class PantryListViewController: UIViewController, UITableViewDelegate {
+class PantryListViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     var mixpanel : Mixpanel!
     
@@ -25,10 +26,54 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var searchBar : UISearchBar!
+    @IBOutlet weak var textField : UITextField!
+    
+    @IBOutlet weak var textFieldBottomSpace : NSLayoutConstraint!
+    var keyboardNotificationHandler : KeyboardNotificationHandler?
     
     enum State {
         case DefaultMode
         case SearchMode
+    }
+
+    @IBOutlet weak var clearButton : UIBarButtonItem!
+    @IBAction func clearButtonTapped(sender: UIBarButtonItem) {
+        
+        let realm = Realm()
+        realm.write() {
+            for ingredient in self.ingredients {
+                ingredient.isChecked = false
+            }
+        }
+        checkedIngredients = ingredients.filter("isChecked = true")
+        sender.enabled = false
+        self.view.endEditing(true)
+        tableView.reloadData()
+    }
+    
+    @IBAction func addButtonTapped(sender: UIButton) {
+        let realm = Realm()
+        
+        if self.textField.text != nil && self.textField.text != "" {
+            for ingredient in ingredients {
+                if textField.text.caseInsensitiveCompare(ingredient.name) == NSComparisonResult(rawValue: 0) {
+                    println("not adding to realm")
+                    self.textField.text = nil
+                    self.view.endEditing(true)
+                    return
+                }
+            }
+            var newIngredient = Ingredient()
+            newIngredient.name = self.textField.text
+            newIngredient.isChecked = false
+            realm.write() {
+                realm.add(newIngredient)
+            }
+            mixpanel.track("Add Ingredient to Pantry")
+            self.tableView.reloadData()
+        }
+        self.textField.text = nil
+        self.view.endEditing(true)
     }
     
     var state: State = .DefaultMode {
@@ -44,31 +89,12 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
                 let searchText = searchBar?.text ?? ""
                 searchBar.setShowsCancelButton(true, animated: true)
                 ingredients = searchIngredients(searchText).sorted("name", ascending: true)
+                UIView.animateWithDuration(0.3) {
+                    self.textFieldBottomSpace.constant = 17
+                    self.view.layoutIfNeeded()
+                }
             }
         }
-    }
-    
-    @IBOutlet weak var clearButton : UIBarButtonItem!
-    @IBAction func clearButtonTapped(sender: UIBarButtonItem) {
-        
-        let realm = Realm()
-        realm.write() {
-            for ingredient in self.ingredients {
-                ingredient.isChecked = false
-            }
-        }
-        checkedIngredients = ingredients.filter("isChecked = true")
-        sender.enabled = false
-        tableView.reloadData()
-        
-//        if state == State.DefaultMode && checkedIngredients.count == 0 {
-//            tableView.setEditing(true, animated: true)
-//            sender.title = "Done"
-//        } else {
-//            tableView.setEditing(false, animated: true)
-//            sender.title = "Edit"
-//        }
-        
     }
 
     override func viewDidLoad() {
@@ -86,6 +112,28 @@ class PantryListViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
+        textField.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        keyboardNotificationHandler = KeyboardNotificationHandler()
+        
+        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                self.textFieldBottomSpace.constant = 17
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                if self.state == State.SearchMode {
+                    return
+                }
+                self.textFieldBottomSpace.constant = height + 8
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,6 +183,9 @@ extension PantryListViewController: UITableViewDelegate {
         } else {
             self.clearButton.enabled = false
         }
+        if self.state == State.DefaultMode {
+            self.view.endEditing(true)
+        }
         tableView.reloadData()
     }
 }
@@ -173,5 +224,21 @@ extension PantryListViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         ingredients = searchIngredients(searchText)
+    }
+}
+
+extension PantryListViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.placeholder = nil
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.placeholder = "Add Ingredient..."
     }
 }
