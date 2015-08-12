@@ -109,6 +109,7 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
             clearButton.enabled = false
         }
         mixpanel = Mixpanel.sharedInstance()
+        addButtonSetUp()
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -120,7 +121,7 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
         
         keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
             UIView.animateWithDuration(0.3) {
-                self.textFieldBottomSpace.constant = 17
+                self.textFieldBottomSpace.constant = 8
                 self.view.layoutIfNeeded()
             }
         }
@@ -150,6 +151,14 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
         let realm = Realm()
         let searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchString)
         return realm.objects(Ingredient).filter(searchPredicate).sorted("name", ascending: true)
+    }
+    
+    func addButtonSetUp() {
+        
+        addButton.backgroundColor = UIColor(red: 43.0/255.0, green: 190.0/255.0, blue: 0, alpha: 1.0)
+        addButton.layer.borderColor = UIColor(red: 43.0/255.0, green: 170.0/255.0, blue: 0, alpha: 1.0).CGColor
+        addButton.layer.cornerRadius = 10
+        addButton.layer.borderWidth = 1
     }
 }
 
@@ -211,6 +220,7 @@ extension PantryListViewController: UITableViewDelegate {
         } else {
             self.clearButton.enabled = true
         }
+        self.view.endEditing(true)
     }
 }
 

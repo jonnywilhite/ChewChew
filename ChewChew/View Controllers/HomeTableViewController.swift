@@ -72,22 +72,13 @@ class HomeTableViewController: UITableViewController {
             cell.textLabel?.text = "Limit Search Results"
             cell.accessoryView = limitSwitch
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            /*let x = IngredientsListViewController.getNumberOfIngredients(IngredientsListViewController())()
-            if x == 1 {
-                cell.textLabel?.text = "\(x) Item"
-            } else {
-                cell.textLabel?.text = "\(x) Items"
-            }
-            cell.detailTextLabel?.text = "View Full List"
-            cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!*/
             
-        } else /*if indexPath.section == 2*/ {
+        } else {
             cell.textLabel?.text = "Search Recipes"
             var myColor = UIColor(red: 24.0/255.0, green: 108.0/255.0, blue: 254.0/255.0, alpha: 1.0)
             cell.textLabel?.textColor = myColor
             cell.accessoryType = UITableViewCellAccessoryType(rawValue: 1)!
         }
-        
         return cell
     }
     
