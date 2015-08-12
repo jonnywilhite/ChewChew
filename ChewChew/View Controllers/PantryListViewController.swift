@@ -50,7 +50,7 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
         self.view.endEditing(true)
         tableView.reloadData()
     }
-    
+    @IBOutlet weak var addButton : UIButton!
     @IBAction func addButtonTapped(sender: UIButton) {
         let realm = Realm()
         
@@ -188,6 +188,30 @@ extension PantryListViewController: UITableViewDelegate {
         }
         tableView.reloadData()
     }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let ingredient = ingredients[indexPath.row] as Object
+            let realm = Realm()
+            realm.write() {
+                realm.delete(ingredient)
+            }
+            mixpanel.track("Deleted Ingredient", properties: ["Style" : "SwipeToDelete"])
+            
+            ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
+            checkedIngredients = ingredients.filter("isChecked = true")
+            tableView.reloadData()
+        }
+        if checkedIngredients.count == 0 {
+            self.clearButton.enabled = false
+        } else {
+            self.clearButton.enabled = true
+        }
+    }
 }
 
 extension PantryListViewController: UITableViewDataSource {
@@ -230,7 +254,7 @@ extension PantryListViewController: UISearchBarDelegate {
 extension PantryListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        self.addButtonTapped(self.addButton)
         return false
     }
     

@@ -424,6 +424,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="k6X-Nk-sUT" id="eqq-7L-PrD"/>
                         <outlet property="clearButton" destination="0EB-A2-sE1" id="ugs-sv-dQS"/>
                         <outlet property="searchBar" destination="v9r-gg-trH" id="EI5-dI-ME9"/>
                         <outlet property="tableView" destination="iO5-Cj-UuA" id="oiw-et-1sJ"/>
