@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xz-E8-Zuq">
-                                <rect key="frame" x="0.0" y="32" width="600" height="548"/>
+                                <rect key="frame" x="8" y="32" width="584" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Welcome to ChewChew, an app that lets you find recipes that use ingredients you already have! Simply add whatever ingredients you have available to cook with and ChewChew will do the rest.
 
@@ -31,14 +31,14 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94117647059999998" green="0.63137254899999995" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" constant="-32" id="2EJ-cR-GTF"/>
                             <constraint firstItem="k5G-gw-hp5" firstAttribute="top" secondItem="7xz-E8-Zuq" secondAttribute="bottom" constant="20" id="Acp-Uq-khn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-16" id="Dkr-Uv-Q1V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-8" id="Dkr-Uv-Q1V"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="top" secondItem="KKN-cw-RLq" secondAttribute="bottom" id="Hpm-q9-spq"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="trailing" secondItem="tIQ-S8-stL" secondAttribute="trailingMargin" id="P6G-7T-mVF"/>
-                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-16" id="Tb5-Zn-Dja"/>
+                            <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-8" id="Tb5-Zn-Dja"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7xz-E8-Zuq" secondAttribute="trailing" constant="-16" id="XBX-8w-Akj"/>
                             <constraint firstItem="k5G-gw-hp5" firstAttribute="top" secondItem="7xz-E8-Zuq" secondAttribute="bottom" constant="20" id="lIe-Qc-17f"/>
                             <constraint firstItem="7xz-E8-Zuq" firstAttribute="leading" secondItem="tIQ-S8-stL" secondAttribute="leadingMargin" constant="-16" id="lf9-yU-2hN"/>
@@ -59,7 +59,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2A-aF-Hxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2029" y="-437"/>
+            <point key="canvasLocation" x="2715" y="278"/>
         </scene>
         <!--Home-->
         <scene sceneID="zjv-9d-ioV">
@@ -68,7 +68,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="oEt-0q-8ng">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Pantry" footerTitle="Ingredients that can be added to your list with a single tap" id="cPE-pB-qYu">
                                 <cells>
@@ -107,7 +107,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Search Results" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riV-DE-3n9">
                                                     <rect key="frame" x="15" y="11" width="158" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ykg-dW-0XD">
@@ -173,89 +173,12 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                         <outlet property="detailLabel" destination="b8y-sZ-Ach" id="oMd-y3-5H3"/>
                         <outlet property="limitSwitch" destination="ykg-dW-0XD" id="VMK-ZN-WEh"/>
                         <segue destination="Qn6-Ab-n01" kind="show" identifier="SearchRecipes" id="D6G-5v-mcl"/>
-                        <segue destination="7BU-U6-VyA" kind="show" identifier="ShowIngredients" id="4bc-bj-5D8"/>
                         <segue destination="IZE-G4-vIn" kind="show" identifier="ShowPantry" id="wQw-bG-foL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2So-Uc-Qrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2029" y="278"/>
-        </scene>
-        <!--Ingredients List-->
-        <scene sceneID="JOA-P1-3Sj">
-            <objects>
-                <viewController id="7BU-U6-VyA" customClass="IngredientsListViewController" customModule="ChewChew" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UHT-2H-EPe"/>
-                        <viewControllerLayoutGuide type="bottom" id="Z0b-YM-c51"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lL7-PY-RQO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NH-2P-6zP">
-                                <rect key="frame" x="211" y="510" width="178" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="178" id="Xbi-gp-4g8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
-                                <state key="normal" title="Clear All Ingredients">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="7BU-U6-VyA" eventType="touchUpInside" id="9ll-pN-BTV"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1QB-gU-0Fp">
-                                <rect key="frame" x="0.0" y="64" width="600" height="408"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IngredientCell" id="4im-jy-CSB" customClass="IngredientTableViewCell" customModule="ChewChew" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4im-jy-CSB" id="rff-yf-gVF">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add an Ingredient..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AUy-zi-iuj">
-                                                    <rect key="frame" x="8" y="12" width="524" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="AUy-zi-iuj" firstAttribute="leading" secondItem="rff-yf-gVF" secondAttribute="leadingMargin" id="6yY-7T-VTm"/>
-                                                <constraint firstAttribute="centerY" secondItem="AUy-zi-iuj" secondAttribute="centerY" constant="-0.5" id="ec0-Ge-QeN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="AUy-zi-iuj" secondAttribute="trailing" constant="60" id="fjc-dw-QXf"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="textField" destination="AUy-zi-iuj" id="B7t-kf-tSH"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="1QB-gU-0Fp" secondAttribute="bottom" constant="128" id="WQ4-Iu-XRg"/>
-                            <constraint firstItem="1QB-gU-0Fp" firstAttribute="top" secondItem="UHT-2H-EPe" secondAttribute="bottom" id="hVu-yX-W6l"/>
-                            <constraint firstAttribute="centerX" secondItem="2NH-2P-6zP" secondAttribute="centerX" id="kTk-ux-LgB"/>
-                            <constraint firstItem="Z0b-YM-c51" firstAttribute="top" secondItem="2NH-2P-6zP" secondAttribute="bottom" constant="54" id="lMF-Bs-haf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1QB-gU-0Fp" secondAttribute="trailing" constant="-16" id="lhv-aS-sga"/>
-                            <constraint firstItem="1QB-gU-0Fp" firstAttribute="leading" secondItem="lL7-PY-RQO" secondAttribute="leadingMargin" constant="-16" id="tDb-Q9-kbI"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Ingredients List" id="dGJ-qD-ij7"/>
-                    <connections>
-                        <outlet property="clearButton" destination="2NH-2P-6zP" id="Dnq-yZ-jiy"/>
-                        <outlet property="tableView" destination="1QB-gU-0Fp" id="eCU-Yw-mmZ"/>
-                        <outlet property="tableViewBottomSpace" destination="WQ4-Iu-XRg" id="T41-14-a4o"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MqL-I3-M2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2715" y="278"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="KBg-Sy-8U4">
@@ -370,7 +293,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKC-Hf-0FK">
                                                     <rect key="frame" x="8" y="22" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
