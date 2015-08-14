@@ -37,6 +37,7 @@ class Pantry {
             realm.write() {
                 realm.add(currentIngredient)
             }
+            println(currentIngredient.lowercaseName)
         }
     }
     

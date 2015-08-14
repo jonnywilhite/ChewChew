@@ -113,18 +113,10 @@ class HomeTableViewController: UITableViewController {
                 tableView.reloadData()
                 return
             }
-            var ingredientsAsAString = ""
+            let keywordHelper = KeywordHelper()
+            let ingredientsAsAString = keywordHelper.improveKeywords(ingredientsToSearchWith)
             
-            for (var i = 0; i < ingredientsToSearchWith.count; i++) {
-                ingredientsAsAString += ingredientsToSearchWith[i].name
-                if (i != ingredientsToSearchWith.count - 1) {
-                    ingredientsAsAString += ","
-                }
-                if ingredientsToSearchWith[i].name == "Chicken" {
-                    ingredientsAsAString += "chicken breasts,chicken bone,chicken breast,chicken legs,chicken thighs,"
-                    
-                }
-            }
+            println(ingredientsAsAString)
             var numParam : Int!
             var request = HTTPTask()
             if limitSwitch.on {

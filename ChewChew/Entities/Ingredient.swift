@@ -10,8 +10,11 @@ import Foundation
 import RealmSwift
 
 class Ingredient : Object {
-    dynamic var name : String = ""
-    dynamic var addedDate = NSDate()
-    dynamic var category : String = ""
+    dynamic var name : String = "" {
+        didSet {
+            lowercaseName = name.lowercaseString
+        }
+    }
+    dynamic var lowercaseName = ""
     dynamic var isChecked : Bool = false
 }

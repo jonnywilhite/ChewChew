@@ -253,11 +253,9 @@ extension IngredientsListViewController: UITextFieldDelegate {
             if shareData.didAddNewIngredient! {
                 currentIngredient = Ingredient()
                 currentIngredient!.name = endingText
-                currentIngredient!.addedDate = NSDate()
                 
                 for name in pantry.listOfAllIngredients {
                     if currentIngredient!.name.caseInsensitiveCompare(name) == NSComparisonResult(rawValue: 0) {
-                        currentIngredient!.category = "pantry"
                         var isAlreadyInIngredients = false
                         for addedIngredient in ingredients {
                             if currentIngredient!.name.caseInsensitiveCompare(addedIngredient.name) == NSComparisonResult(rawValue: 0) {
@@ -279,7 +277,6 @@ extension IngredientsListViewController: UITextFieldDelegate {
                             break
                         }
                     } else {
-                        currentIngredient!.category = "user-specific"
                     }
                 }
                 
@@ -307,7 +304,6 @@ extension IngredientsListViewController: UITextFieldDelegate {
                             
                             isInPantry = true
                             realm.write() {
-                                self.currentIngredient!.category = "pantry"
                             }
                             var isAlreadyInIngredients = false
                             for addedIngredient in ingredients {
@@ -335,14 +331,10 @@ extension IngredientsListViewController: UITextFieldDelegate {
                             }
                         }
                         realm.write() {
-                            self.currentIngredient!.category = "user-specific"
                         }
                     }
                     realm.write() {
                         self.currentIngredient!.name = textField.text
-                        if self.currentIngredient!.category == "pantry" {
-                            self.currentIngredient!.category = "pantry"
-                        }
                     }
                 }
             }

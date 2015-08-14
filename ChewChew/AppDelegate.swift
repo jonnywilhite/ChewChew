@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mixpanel: Mixpanel = Mixpanel.sharedInstance()
         mixpanel.track("App launched")
         
-        
-        
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 240.0/255.0, green: 161.0/255.0, blue: 15.0/255.0, alpha: 1.0)
@@ -35,24 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         titleBarAttributes.setValue(UIFont(name: "Avenir-Medium", size: 18), forKey: NSFontAttributeName)
         UINavigationBar.appearance().titleTextAttributes = titleBarAttributes as [NSObject : AnyObject]
         
-        
-        
-        // Inside your application(application:didFinishLaunchingWithOptions:)
-        
-        // Notice setSchemaVersion is set to 1, this is always set manually. It must be
-        // higher than the previous version (oldSchemaVersion) or an RLMException is thrown
-        setSchemaVersion(6, Realm.defaultPath, { migration, oldSchemaVersion in
-            // We haven’t migrated anything yet, so oldSchemaVersion == 0
-            if oldSchemaVersion < 6 {
+        setSchemaVersion(10, Realm.defaultPath, { migration, oldSchemaVersion in
+            if oldSchemaVersion < 10 {
                 // Nothing to do!
                 // Realm will automatically detect new properties and removed properties
                 // And will update the schema on disk automatically
             }
         })
-        // now that we have called `setSchemaVersion(_:_:_:)`, opening an outdated
-        // Realm will automatically perform the migration and opening the Realm will succeed
-        // i.e. Realm()
-        // Override point for customization after application launch.
         
         let realm = Realm()
         if !NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") {
@@ -62,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 realm.deleteAll()
             }
             let pantry = Pantry.sharedInstance
-            pantry.setUpPantry()
+            //pantry.setUpPantry()
         }
         return true
     }

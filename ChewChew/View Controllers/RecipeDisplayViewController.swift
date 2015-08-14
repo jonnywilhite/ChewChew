@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class RecipeDisplayViewController: UIViewController, UIWebViewDelegate {
     
@@ -14,16 +15,30 @@ class RecipeDisplayViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var urlToOpen : NSURL!
+    var mixpanel : Mixpanel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = NSURLRequest(URL: urlToOpen!)
+        mixpanel = Mixpanel.sharedInstance()
         
         webView.delegate = self
         
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
-        webView.loadRequest(request)
+        
+        if let urlRequest = urlToOpen {
+            let request = NSURLRequest(URL: urlToOpen!)
+            webView.loadRequest(request)
+        }
+        else {
+            let alertController = UIAlertController(title: "Recipe Not Available", message:
+                "Hyperlink to recipe is broken", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            mixpanel.track("Error", properties: ["Cause" : "No Link to Recipe"])
+            activityIndicator.stopAnimating()
+        }
     }
 
     override func didReceiveMemoryWarning() {

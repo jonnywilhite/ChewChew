@@ -81,14 +81,14 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
             switch (state) {
             case .DefaultMode:
                 let realm = Realm()
-                ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
+                ingredients = realm.objects(Ingredient).sorted("lowercaseName", ascending: true)
                 searchBar.resignFirstResponder()
                 searchBar.text = ""
                 searchBar.showsCancelButton = false
             case .SearchMode:
                 let searchText = searchBar?.text ?? ""
                 searchBar.setShowsCancelButton(true, animated: true)
-                ingredients = searchIngredients(searchText).sorted("name", ascending: true)
+                ingredients = searchIngredients(searchText).sorted("lowercaseName", ascending: true)
                 UIView.animateWithDuration(0.3) {
                     self.textFieldBottomSpace.constant = 17
                     self.view.layoutIfNeeded()
@@ -101,7 +101,7 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
         super.viewDidLoad()
         
         let realm = Realm()
-        ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
+        ingredients = realm.objects(Ingredient).sorted("lowercaseName", ascending: true)
         checkedIngredients = ingredients.filter("isChecked = true")
         
         clearButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 17)!], forState: UIControlState.Normal)
@@ -150,15 +150,16 @@ class PantryListViewController: UIViewController, UITableViewDelegate, UITextFie
     func searchIngredients(searchString: String) -> Results<Ingredient> {
         let realm = Realm()
         let searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchString)
-        return realm.objects(Ingredient).filter(searchPredicate).sorted("name", ascending: true)
+        return realm.objects(Ingredient).filter(searchPredicate).sorted("lowercaseName", ascending: true)
     }
     
     func addButtonSetUp() {
         
         addButton.backgroundColor = UIColor(red: 43.0/255.0, green: 190.0/255.0, blue: 0, alpha: 1.0)
         addButton.layer.borderColor = UIColor(red: 43.0/255.0, green: 170.0/255.0, blue: 0, alpha: 1.0).CGColor
-        addButton.layer.cornerRadius = 10
+        addButton.layer.cornerRadius = 5
         addButton.layer.borderWidth = 1
+        addButton.hidden = true
     }
 }
 
@@ -175,14 +176,14 @@ extension PantryListViewController: UITableViewDelegate {
                 self.currentPantryIngredient!.isChecked = true
             }
             searchBar.text = nil
-            ingredients = searchIngredients(searchBar.text).sorted("name", ascending: true)
+            ingredients = searchIngredients(searchBar.text).sorted("lowercaseName", ascending: true)
             mixpanel.track("Added Ingredient", properties: ["Style" : "CheckOne"])
         } else {
             realm.write() {
                 self.currentPantryIngredient!.isChecked = false
             }
             searchBar.text = nil
-            ingredients = searchIngredients(searchBar.text).sorted("name", ascending: true)
+            ingredients = searchIngredients(searchBar.text).sorted("lowercaseName", ascending: true)
             mixpanel.track("Deleted Ingredient", properties: ["Style" : "UncheckOne"])
         }
         
@@ -194,6 +195,8 @@ extension PantryListViewController: UITableViewDelegate {
         }
         if self.state == State.DefaultMode {
             self.view.endEditing(true)
+        } else if self.state == State.SearchMode {
+            self.searchBar.resignFirstResponder()
         }
         tableView.reloadData()
     }
@@ -211,7 +214,7 @@ extension PantryListViewController: UITableViewDelegate {
             }
             mixpanel.track("Deleted Ingredient", properties: ["Style" : "SwipeToDelete"])
             
-            ingredients = realm.objects(Ingredient).sorted("name", ascending: true)
+            ingredients = realm.objects(Ingredient).sorted("lowercaseName", ascending: true)
             checkedIngredients = ingredients.filter("isChecked = true")
             tableView.reloadData()
         }
@@ -259,6 +262,10 @@ extension PantryListViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         ingredients = searchIngredients(searchText)
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension PantryListViewController: UITextFieldDelegate {
@@ -270,9 +277,11 @@ extension PantryListViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.placeholder = nil
+        addButton.hidden = false
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
         textField.placeholder = "Add Ingredient..."
+        addButton.hidden = true
     }
 }

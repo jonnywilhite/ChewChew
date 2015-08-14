@@ -53,7 +53,7 @@ struct SearchHandling {
                             sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredient"
                         } else {
                             sender.currentRecipe!.recipeDescription.value = "Uses \(usedCount) of your ingredients but requires \(missedCount) more ingredients"
-                        }
+                        } 
                         
                         //Set the missingCount of the Recipe
                         sender.currentRecipe!.missingCount.value = missedCount
