@@ -97,7 +97,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle=" " footerTitle="Enable to exclude recipes that require a large number of additional ingredients" id="NIB-hm-CUv">
+                            <tableViewSection headerTitle=" " footerTitle="Enabling will generate fewer recipes, but no recipe will require more than a few additional ingredients" id="NIB-hm-CUv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="kT9-ok-cc3" customClass="TableViewCell" customModule="ChewChew" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -292,7 +292,7 @@ All recipes provided by this app are property of Spoonacular (http://spoonacular
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2z9-9z-MPp">
                                                     <rect key="frame" x="8" y="22" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

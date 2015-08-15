@@ -20,7 +20,7 @@ struct KeywordHelper {
             if name.caseInsensitiveCompare("Chicken") == NSComparisonResult(rawValue: 0) {
                 ingredientsAsAString += ",chicken breasts,chicken bone,chicken breast,chicken legs,chicken thighs,chicken wings"
             } else if name.caseInsensitiveCompare("Beef") == NSComparisonResult(rawValue: 0) {
-                ingredientsAsAString += ",beef round roast,beef stew meat"
+                ingredientsAsAString += ",beef round roast,beef stew meat,beef top sirloin steak,roast beef,flank steak,beef sirloin tip roast,beef tenderloin,chuck roast,beef chuck roast,tenderloin,beef brisket,steak,beef shanks"
             } else if name.caseInsensitiveCompare("Mushrooms") == NSComparisonResult(rawValue: 0) {
                 ingredientsAsAString += ",cremini mushrooms"
             } else if name.caseInsensitiveCompare("Bell pepper") == NSComparisonResult(rawValue: 0) {
@@ -59,7 +59,15 @@ struct KeywordHelper {
                 ingredientsAsAString += ",pork loin"
             } else if name.caseInsensitiveCompare("Mayonnaise") == NSComparisonResult(rawValue: 0) {
                 ingredientsAsAString += ",mayo"
-            } 
+            } else if name.caseInsensitiveCompare("Turkey") == NSComparisonResult(rawValue: 0) {
+                ingredientsAsAString += ",ground turkey"
+            } else if name.caseInsensitiveCompare("Sage") == NSComparisonResult(rawValue: 0) {
+                ingredientsAsAString += ",ground sage"
+            } else if name.caseInsensitiveCompare("Thyme") == NSComparisonResult(rawValue: 0) {
+                ingredientsAsAString += ",ground thyme"
+            } else if name.caseInsensitiveCompare("Spinach") == NSComparisonResult(rawValue: 0) {
+                ingredientsAsAString += ",fresh baby spinach"
+            }
             
             if (i != ingredients.count - 1) {
                 ingredientsAsAString += ","

@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 realm.deleteAll()
             }
             let pantry = Pantry.sharedInstance
-            //pantry.setUpPantry()
+            pantry.setUpPantry()
         }
         return true
     }
